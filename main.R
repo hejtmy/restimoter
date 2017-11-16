@@ -26,5 +26,5 @@ df_estimote_all <- do.call("rbind", list(df_estimote, df_estimote_smoothed_1))
 plt <- ggplot(df_estimote_all, aes(Position.X, Position.Y, color = as.factor(smoothed)))
 plt + geom_path()
 
-plt <- ggplot(df_estimote_smoothed_1, aes(Position.X, Position.Y, color = as.factor(smoothed)))
-plt + geom_path()
+plt <- ggplot(df_estimote_smoothed_1, aes(Position.X, Position.Y))
+plt + geom_point()
