@@ -1,10 +1,23 @@
 library(ggplot2)
 library(forecast)
 filename <- "D:/GoogleDrive/Davis/Data/NEO-2017-11-12-20-02.csv"
+filename <- "D:/GoogleDrive/Davis/Data/main-2017-11-24-15-54.csv"
+filename <- "D:/GoogleDrive/Davis/Data/stopAtBeacons-2017-11-24-15-58.csv"
 
 df_estimote <- read.csv(filename, sep = ";")
-plt <- ggplot(df_estimote, aes(Position.X, Position.Y))
-plt + geom_path()
+n <- nrow(df_estimote)
+df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])
+
+points <- data.matrix(df_estimote[2:3])
+df_estimote$position.diff <- euclid_distance_col(points)
+
+df_estimote$speed <- df_estimote$position.diff/df_estimote$time.diff
+
+plt <- ggplot(df_estimote, aes(Position.X, Position.Y, color = (Time)))
+plt + geom_point()
+
+ggplot(df_estimote, aes(Time, speed, color = Accuracy)) + geom_line()
+
 
 plt <- ggplot(df_estimote, aes(Time, Orientation))
 plt + geom_path()
