@@ -19,3 +19,6 @@ RestimoteObject with removed Ids and recomputed new ids
 \description{
 Title
 }
+\examples{
+obj <- remove_pointing(obj, "Should point", c(1, 4))
+}

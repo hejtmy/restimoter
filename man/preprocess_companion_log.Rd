@@ -2,13 +2,16 @@
 % Please edit documentation in R/preprocessing-restimote.R
 \name{preprocess_companion_log}
 \alias{preprocess_companion_log}
-\title{Title}
+\title{Preprocessses and returns RestimoteObject companion}
 \usage{
 preprocess_companion_log(obj)
 }
 \arguments{
 \item{obj}{RestimoteObject}
 }
+\value{
+preprocesse RestimoteObject
+}
 \description{
-Title
+Preprocessses and returns RestimoteObject companion
 }

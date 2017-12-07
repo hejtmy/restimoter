@@ -17,3 +17,6 @@ RestimoteObject with removed Ids and recomputed new ids
 \description{
 Remove pointing mistakes from companion
 }
+\examples{
+obj <- remove_pointing(obj, c(1, 4))
+}

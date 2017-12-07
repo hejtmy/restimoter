@@ -11,6 +11,9 @@ get_position_trial(obj, trialId)
 
 \item{trialID}{int designating which trial to select}
 }
+\value{
+log data.frame with only rows from during the trial
+}
 \description{
 Gets position data inside trial
 }

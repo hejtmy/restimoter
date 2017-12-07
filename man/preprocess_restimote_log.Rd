@@ -2,13 +2,16 @@
 % Please edit documentation in R/preprocessing-restimote.R
 \name{preprocess_restimote_log}
 \alias{preprocess_restimote_log}
-\title{Title}
+\title{Preprocesses and returns restimote log}
 \usage{
 preprocess_restimote_log(obj)
 }
 \arguments{
 \item{obj}{}
 }
+\value{
+preprocessed RestimoteObject
+}
 \description{
-Title
+Preprocesses and returns restimote log
 }

@@ -17,3 +17,7 @@ RestimoteObject with removed Ids and recomputed new ids
 \description{
 Remove trial mistakes from companion
 }
+\examples{
+obj <- remove_trials(obj, c(1, 4))
+obj <- remove_trials(obj, 9)
+}
