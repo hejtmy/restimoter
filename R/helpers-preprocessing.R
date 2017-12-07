@@ -10,7 +10,7 @@ add_actions_ids <- function(df){
 
 is_companion_preprocessed <- function(obj){
   if(!("Id" %in% colnames(obj$companion))){
-    warning("Companion doesn'thave ID column. Have you preprocessed it yet?")
+    warning("Companion doesn't have ID column. Have you preprocessed it yet?")
     return(FALSE)
   }
   return(TRUE)
@@ -18,4 +18,18 @@ is_companion_preprocessed <- function(obj){
 
 remove_mistakes <- function(df){
   
+}
+
+# returns bool if the log has appropriate columns
+is_log_preprocessed <- function(obj){
+  
+}
+
+add_walked_distance <- function(obj){
+  obj$log$distance <- euclid_distance_col(data.frame(obj$log$Position.X, obj$log$Position.Y))
+  return(obj)
+}
+
+correct_compass <- function(obj){
+  return(obj)
 }

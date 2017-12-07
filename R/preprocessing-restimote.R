@@ -22,7 +22,9 @@ preprocess_companion_log <- function(obj){
 #'
 #' @examples
 preprocess_restimote_log <- function(obj){
-  
+  obj <- add_walked_distance(obj)
+  obj <- correct_compass(obj)
+  return(obj)
 }
 
 ## Post preprocessing cleaning ----
