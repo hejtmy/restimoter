@@ -1,18 +1,22 @@
 Package: restimoter
 Title: Loading, preprocessing and visualising logs from restimote app
 Version: 0.1
-Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.ocm",
+Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.com",
                   role = c("aut", "cre"))
 Description: This package comes with functions to load, preprocess
   and visualise data coming from the restimote app. It is being 
   keep in sync with he data format restimote is outputting. Check version
   if you have trouble reading it.
-Depends: R (>= 3.1.0)
 License: MIT
 LazyData: true
-Suggests: 
+Depends:
+  R (>= 3.1.0)
+Suggests:
   testthat,
   knitr,
   rmarkdown
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Imports: 
+  jsonlite,
+  stringr

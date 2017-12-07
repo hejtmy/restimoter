@@ -1,0 +1,41 @@
+***SETTINGS***
+{
+  "participant_id" : "NEO",
+  "date" : "2017-12-03-18"
+}
+---SETTINGS---
+Time; Action
+65563.975;New trial
+65619.294;New trial
+65642.443;New trial
+65681.211;New trial
+65739.129;New trial
+65798.365;New trial
+65814.048;New trial
+65844.916;New trial
+65872.250;New trial
+65911.851;New trial
+65940.519;New trial
+65955.302;New trial
+65983.286;New trial
+66014.404;New trial
+66022.221;New trial
+66051.422;New trial
+66061.505;New trial
+66084.556;New trial
+66114.457;SOP new view
+66124.107;Should point
+66141.008;Should point
+66146.642;Should point
+66156.058;Should point
+66163.425;Should point
+66170.425;Should point
+66177.325;Should point
+66183.142;Should point
+66220.877;SOP new view
+66224.427;Should point
+66230.377;Should point
+66242.444;Should point
+66253.429;Should point
+66261.028;Should point
+66269.211;Should point
