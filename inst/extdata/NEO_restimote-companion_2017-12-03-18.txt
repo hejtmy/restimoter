@@ -1,7 +1,7 @@
 ***SETTINGS***
 {
   "participant_id" : "NEO",
-  date" : "2017-12-03-18"
+  "date" : "2017-12-03-18"
 }
 ---SETTINGS---
 Time; Action

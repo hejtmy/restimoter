@@ -4,17 +4,17 @@
 \alias{load_restimote_companion_log}
 \title{Opens restimote companion app in a given folder}
 \usage{
-load_restimote_companion_log(filepath, timestamp = NULL, obj = NULL)
+load_restimote_companion_log(log_path, exp_timestamp = NULL, obj = NULL)
 }
 \arguments{
-\item{filepath}{either a filepath, or directory where the file is located}
+\item{log_path}{either a filepath, or directory where the file is located}
 
-\item{timestamp}{in case multiple restimotes are in the directory}
+\item{exp_timestamp}{in case multiple restimotes are in the directory}
 
 \item{obj}{already created restimote object}
 }
 \value{
-
+Restimote object with filled in data
 }
 \description{
 Opens restimote companion app in a given folder

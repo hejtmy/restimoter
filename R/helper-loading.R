@@ -15,6 +15,28 @@ create_log_search_pattern <- function(log_name, log_timestamp){
   return(ptr)
 }
 
+# Gets RestimoteObject and loaded settings in list
+# iterates through given params and fills them in if empty
+fill_in_settings <- function(obj, ls){
+  settings_params <- c("participant_id", "compass_offset", "date")
+  for (param in settings_params){
+    if(length(obj[[param]] == 0)) obj[[param]] <- ls[[param]]
+  }
+  return(obj)
+}
+
+# Goes throught given folder and finds a restimote log
+# Returns filepath or returns NULL
+find_restimote_file <- function(dir, type, exp_timestamp = NULL){
+  ptr <- create_log_search_pattern(type, exp_timestamp)
+  logs <- list.files(dir, pattern = ptr, full.names = T)
+  if(length(logs) < 1){
+    print(paste0("Could not find any ", type, " logs in ", directory))
+    return(NULL)
+  }
+  return(logs[1])
+}
+
 get_json_between = function(text, string){
   ls = json_to_list(get_text_between(text, string))
   return(ls)

@@ -4,12 +4,14 @@
 \alias{load_restimote_log}
 \title{Opens restimote log and attachï¿½s it to the restimote object}
 \usage{
-load_restimote_log(filepath, timestamp = NULL)
+load_restimote_log(log_path, exp_timestamp = NULL, obj = NULL)
 }
 \arguments{
-\item{filepath}{path to the restomote log, oir direcotry where the log is located}
+\item{exp_timestamp}{what timestamp should the log have?}
 
-\item{timestamp}{what timestamp should the log have?}
+\item{obj}{If instantiated, object to be filled with data}
+
+\item{path}{path to the restomote log, oir direcotry where the log is located}
 }
 \value{
 restimote object with loaded log

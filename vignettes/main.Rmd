@@ -24,6 +24,7 @@ library(forecast)
 library(restimoter)
 dir_path <- system.file("extdata", package = "restimoter")
 obj <- load_restimote_log(dir_path)
+obj <- load_restimote_companion_log(dir_path, obj = obj)
 ```
 df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])
 df_estimote$angle.diff <- c(0, df_estimote$Orientation[2:n]-df_estimote$Orientation[1:n-1])
