@@ -25,7 +25,7 @@ get_trial_times <- function(obj, trialId){
   if(trialId == obj$n_trials - 1){
     ls$end <- obj$companion$Time[get_row_action_id(obj$companion, NEW_TRIAL, trialId + 1)]
   } else {
-    ls$end <- obj$companion$Time[get_row_action_id(obj$companion, NEW_TRIAL, trialId + 1)]
+    ls$end <- obj$companion$Time[get_row_action_id(obj$companion, NEW_SOP_VIEW, 1)]
   }
   return(ls)
 }
