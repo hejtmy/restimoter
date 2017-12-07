@@ -17,17 +17,21 @@ get_position_trial <- function(obj, trialID){
 #' @export 
 #'
 #' @examples 
-get_number_of_trials <- function(obj){
+get_n_trials <- function(obj){
   return(get_n_events(obj$companion, "New trial"))
 }
 
-#' Gets number of times participant should point
+#' Gets number of times participant should point and pointed
 #'
 #' @param obj RestimoteObject
 #'
-#' @return
+#' @return list with log, companion fields
 #' @export
 
-get_number_of_pointings <- function(obj){
-  return(get_n_events(obj$companion, "Should point"))
+get_n_pointings <- function(obj){
+  ls <- list()
+  ls$log <- get_n_events(obj$log, "pointed")
+  ls$companion <- get_n_events(obj$companion, "Should point")
+  print(paste0("Player pointed ", ls$log, " and companion has ", ls$companion," points registered."))
+  return(ls)
 }

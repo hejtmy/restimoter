@@ -39,6 +39,18 @@ head(obj$companion)
 
 # Cleaning up
 
+First we need ot add in helper columns
+```{r}
+obj <- preprocess_companion_log(obj)
+
+```
+
+Then we may remove wrong or mistaken trials.
+In my research notes, I put down that the 7th and 8th trial were registyered in the companion app by mistake. So we remove them
+```{r}
+obj <- remove_pointing(obj, c(7:8))
+```
+
 # Results
 
 # Plotting
