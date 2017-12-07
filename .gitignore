@@ -25,3 +25,6 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 inst/doc
+
+## PRIVATE
+main.R

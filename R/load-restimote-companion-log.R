@@ -5,6 +5,6 @@
 #' @param obj already created restimote object
 #' @return 
 #' 
-open_restimote_companion_log <- function(filepath, timestamp = NULL, obj = NULL){
+load_restimote_companion_log <- function(filepath, timestamp = NULL, obj = NULL){
   
 }

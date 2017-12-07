@@ -4,6 +4,6 @@
 #' @param timestamp what timestamp should the log have?
 #' @return restimote object with loaded log 
 #' 
-open_restimote_log <- function(filepath, timestamp = NULL){
+load_restimote_log <- function(filepath, timestamp = NULL){
   
 }
