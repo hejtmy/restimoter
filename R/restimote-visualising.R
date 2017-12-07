@@ -16,6 +16,8 @@ plot_trial_path <- function(obj, trialId){
   df_trial_log <- get_position_trial(obj, trialId)
   plt <- ggplot(df_trial_log, aes(Position.X, Position.Y))
   plt <- plt + geom_path()
-  plt <- plt + xlim(0, 25) + ylim(0, 25)
+  if(!is.na(obj$location_size)){
+    plt <- plt + xlim(0, obj$location_size[1]) + ylim(0, obj$location_size[2])
+  }
   plt
 }

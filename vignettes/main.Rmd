@@ -54,9 +54,11 @@ obj <- remove_pointing(obj, c(7:8))
 # Results
 
 # Plotting
-```{r}
-library(ggplot2)
+requires ggplot 
 
+if we want nice graphs, we need to set the location boundaries first
+```{r}
+obj$location_size <- c(25, 25)
 ```
 
 #Smoothing
