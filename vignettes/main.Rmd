@@ -15,17 +15,60 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-# next section
-asdasd
+# Loading
+
+Loading 
 
 ```{r}
-library(ggplot2)
-library(forecast)
 library(restimoter)
 dir_path <- system.file("extdata", package = "restimoter")
 obj <- load_restimote_log(dir_path)
 obj <- load_restimote_companion_log(dir_path, obj = obj)
 ```
+Data is now loaded in a list object 
+
+we can access restimote log easilly by 
+```{r}
+head(obj$log)
+
+```
+
+```{r}
+head(obj$companion)
+```
+
+# Cleaning up
+
+First we need ot add in helper columns
+```{r}
+obj <- preprocess_companion_log(obj)
+obj <- preprocess_restimote_log(obj)
+```
+
+Then we may remove wrong or mistaken trials.
+In my research notes, I put down that the 7th and 8th trial were registyered in the companion app by mistake. So we remove them
+```{r}
+obj <- remove_pointing(obj, c(7:8))
+```
+
+# Results
+
+# Plotting
+requires ggplot 
+
+if we want nice graphs, we need to set the location boundaries first
+```{r}
+obj$location_size <- c(25, 25)
+```
+
+#Smoothing
+```{r}
+library(forecast)
+
+```
+
+
+
 df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])
 df_estimote$angle.diff <- c(0, df_estimote$Orientation[2:n]-df_estimote$Orientation[1:n-1])
 

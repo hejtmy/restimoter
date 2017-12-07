@@ -17,7 +17,7 @@ load_restimote_log <- function(log_path, exp_timestamp = NULL, obj = NULL){
   bottomHeaderIndex <- get_indicies_between(text, "SETTINGS")$end
   ls <- get_json_between(text, "SETTINGS")
   obj <- fill_in_settings(obj, ls)
-  obj$companion <- read.table(log_path, header = T, sep = ";", 
+  obj$log <- read.table(log_path, header = T, sep = ";", 
                         stringsAsFactors = F, skip = bottomHeaderIndex)
   return(obj)
 }

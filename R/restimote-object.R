@@ -10,6 +10,8 @@ RestimoteObject <- function(){
   obj$session <- NA
   obj$date <- NA
   obj$compass_offset <- NA
+  obj$n_trials <- NA
+  obj$location_size <- NA
   obj$log <- NA
   obj$companion <- NA
   return(obj)
