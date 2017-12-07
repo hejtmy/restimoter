@@ -19,4 +19,5 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Imports: 
   jsonlite,
-  stringr
+  stringr,
+  ggplot2
