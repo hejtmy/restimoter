@@ -7,12 +7,16 @@ Description: This package comes with functions to load, preprocess
   and visualise data coming from the restimote app. It is being 
   keep in sync with he data format restimote is outputting. Check version
   if you have trouble reading it.
-Depends: R (>= 3.1.0)
 License: MIT
 LazyData: true
-Suggests: 
+Depends:
+  R (>= 3.1.0)
+Suggests:
   testthat,
   knitr,
   rmarkdown
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+Imports: 
+  jsonlite,
+  stringr
