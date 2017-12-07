@@ -1,4 +1,4 @@
-Package: restimote-reader
+Package: restimoter
 Title: Loading, preprocessing and visualising logs from restimote app
 Version: 0.1
 Authors@R: person("Lukas", "Hejtmanek", email = "hejtmy@gmail.ocm",
@@ -10,8 +10,9 @@ Description: This package comes with functions to load, preprocess
 Depends: R (>= 3.1.0)
 License: MIT
 LazyData: true
-Suggests: testthat,
-    knitr,
-    rmarkdown
+Suggests: 
+  testthat,
+  knitr,
+  rmarkdown
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
