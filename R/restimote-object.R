@@ -1,6 +1,7 @@
 #' Creates list with parameters to be filled while processng
 #' 
 #' @return list with instantiated fields
+#' @export
 
 RestimoteObject <- function(){
   obj <- list()
