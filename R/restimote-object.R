@@ -1,3 +1,7 @@
+#' Creates list with parameters to be filled while processng
+#' 
+#' @return list with instantiated fields
+
 RestimoteObject <- function(){
   obj <- list()
   obj$participant_id <- ""
