@@ -33,11 +33,13 @@ head(obj$log)
 
 ```
 
-
 ```{r}
 head(obj$companion)
 ```
 
+# Cleaning up
+
+# Results
 
 # Plotting
 ```{r}
