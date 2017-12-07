@@ -3,10 +3,13 @@
 #' @param obj RestimoteObject object
 #' @param trialID int designating which trial to select
 #' 
+#' @return log data.frame with only rows from during the trial
+#' 
 #' @export
-
 get_position_trial <- function(obj, trialId){
-  
+  timewindow <- get_trial_times(obj, trialId)
+  df_log <- get_log_between(obj$log, timewindow$start, timewindow$end)
+  return(df_log)
 }
 
 #' Colelcts start and end times for trial of particular id
@@ -21,11 +24,11 @@ get_position_trial <- function(obj, trialId){
 get_trial_times <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
-  ls$start <- obj$companion$Time[get_row_action_id(obj$companion, NEW_TRIAL, trialId)]
+  ls$start <- obj$companion$Time[get_index_action_id(obj$companion, NEW_TRIAL, trialId)]
   if(trialId == obj$n_trials - 1){
-    ls$end <- obj$companion$Time[get_row_action_id(obj$companion, NEW_TRIAL, trialId + 1)]
+    ls$end <- obj$companion$Time[get_index_action_id(obj$companion, NEW_SOP_VIEW, 1)]
   } else {
-    ls$end <- obj$companion$Time[get_row_action_id(obj$companion, NEW_SOP_VIEW, 1)]
+    ls$end <- obj$companion$Time[get_index_action_id(obj$companion, NEW_TRIAL, trialId + 1)]
   }
   return(ls)
 }
