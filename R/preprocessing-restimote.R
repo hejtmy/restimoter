@@ -1,8 +1,8 @@
-#' Title
+#' Preprocessses and returns RestimoteObject companion
 #'
 #' @param obj RestimoteObject 
 #'
-#' @return 
+#' @return preprocesse RestimoteObject
 #' @export
 #'
 #' @examples
@@ -13,11 +13,11 @@ preprocess_companion_log <- function(obj){
 }
 
 
-#' Title
+#' Preprocesses and returns restimote log
 #'
 #' @param obj 
 #'
-#' @return
+#' @return preprocessed RestimoteObject
 #' @export
 #'
 #' @examples
@@ -36,7 +36,8 @@ preprocess_restimote_log <- function(obj){
 #' @export
 #'
 #' @examples
-
+#' obj <- remove_trials(obj, c(1, 4))
+#' obj <- remove_trials(obj, 9)
 remove_trials <- function(obj, ids){
   obj <- remove_companion_ids(obj, NEW_TRIAL, ids)
   obj$n_trials <- sum(obj$companion$Action == "New trial")
@@ -51,7 +52,8 @@ remove_trials <- function(obj, ids){
 #' @return RestimoteObject with removed Ids and recomputed new ids
 #' @export
 #'
-#' @examples
+#' @examples 
+#' obj <- remove_pointing(obj, c(1, 4))
 remove_pointing <- function(obj, ids){
   obj <- remove_companion_ids(obj, SHOULD_POINT, ids)
   return(obj)
@@ -66,7 +68,8 @@ remove_pointing <- function(obj, ids){
 #' @return RestimoteObject with removed Ids and recomputed new ids
 #' @export
 #'
-#' @examples
+#' @examples 
+#' obj <- remove_pointing(obj, "Should point", c(1, 4))
 remove_companion_ids <- function(obj, action, ids){
   if(!is_companion_preprocessed(obj)) return(obj)
   should_remove <- (obj$companion$Action == action & (obj$companion$Id %in% ids))

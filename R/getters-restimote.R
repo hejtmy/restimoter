@@ -9,7 +9,7 @@ get_position_trial <- function(obj, trialId){
   
 }
 
-#' 
+#' Colelcts start and end times for trial of particular id
 #'
 #' @param obj Restimote object
 #' @param trialId 
