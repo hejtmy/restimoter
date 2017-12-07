@@ -1,4 +1,16 @@
-#' Title
+#' plot entire path log from the restimote
+#'
+#' @param obj 
+#'
+#' @return plot with walked path
+#' @export
+#'
+#' @examples
+plot_path <- function(obj){
+  plot_walking_path(obj$log, obj$location_size)
+}
+
+#' plots a single trial path
 #'
 #' @param obj RestimoteObject Needs to be preprocessed
 #' @param trialId integed of given trial
@@ -9,15 +21,22 @@
 #' @examples
 #' plot_trial_path(obj, 1)
 plot_trial_path <- function(obj, trialId){
-  if (!requireNamespace("ggplot2", quietly = T)){
-    stop("Needs ggplot2 to continue.")
-  }
-  library(ggplot2)
   df_trial_log <- get_position_trial(obj, trialId)
-  plt <- ggplot(df_trial_log, aes(Position.X, Position.Y))
-  plt <- plt + geom_path()
-  if(!is.na(obj$location_size)){
-    plt <- plt + xlim(0, obj$location_size[1]) + ylim(0, obj$location_size[2])
-  }
-  plt
+  plot_walking_path(df_trial_log, obj$location_size)
+}
+
+
+#' Plots path between two timepoints
+#'
+#' @param obj RestimoteObject
+#' @param start time when we want to start plotting
+#' @param end time at which we shoudl stop plotting
+#'
+#' @return plot
+#' @export
+#'
+#' @examples
+plot_path_time <- function(obj, start, end){
+  df_log <- get_position_between(obj, start, end)
+  plot_walking_path(df_trial_log, obj$location_size)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/restimote-visualising.R
 \name{plot_trial_path}
 \alias{plot_trial_path}
-\title{Title}
+\title{plots a single trial path}
 \usage{
 plot_trial_path(obj, trialId)
 }
@@ -15,7 +15,7 @@ plot_trial_path(obj, trialId)
 prints plot
 }
 \description{
-Title
+plots a single trial path
 }
 \examples{
 plot_trial_path(obj, 1)

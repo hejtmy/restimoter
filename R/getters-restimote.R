@@ -8,7 +8,7 @@
 #' @export
 get_position_trial <- function(obj, trialId){
   timewindow <- get_trial_times(obj, trialId)
-  df_log <- get_log_between(obj$log, timewindow$start, timewindow$end)
+  df_log <- get_position_between(obj$log, timewindow$start, timewindow$end)
   return(df_log)
 }
 

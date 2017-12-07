@@ -4,7 +4,7 @@ get_n_events <- function(df, event){
   return(n_trials)
 }
 
-get_log_between <- function(df_log, start, end){
+get_position_between <- function(df_log, start, end){
   i_start <- get_index_time(df_log, start)
   i_end <- get_index_time(df_log, end)
   if(is.null(i_start) || is.null(i_end)){
