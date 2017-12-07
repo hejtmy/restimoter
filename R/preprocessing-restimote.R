@@ -8,6 +8,7 @@
 #' @examples
 preprocess_companion_log <- function(obj){
   obj$companion <- add_actions_ids(obj$companion)
+  obj$n_trials <- get_n_events(obj$companion, NEW_TRIAL)
   return(obj)
 }
 
@@ -37,7 +38,8 @@ preprocess_restimote_log <- function(obj){
 #' @examples
 
 remove_trials <- function(obj, ids){
-  obj <- remove_companion_ids(obj, "New trial", ids)
+  obj <- remove_companion_ids(obj, NEW_TRIAL, ids)
+  obj$n_trials <- sum(obj$companion$Action == "New trial")
   return(obj)
 }
 
@@ -51,7 +53,7 @@ remove_trials <- function(obj, ids){
 #'
 #' @examples
 remove_pointing <- function(obj, ids){
-  obj <- remove_companion_ids(obj, "Should point", ids)
+  obj <- remove_companion_ids(obj, SHOULD_POINT, ids)
   return(obj)
 }
 

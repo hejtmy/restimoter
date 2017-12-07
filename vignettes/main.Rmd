@@ -42,7 +42,6 @@ head(obj$companion)
 First we need ot add in helper columns
 ```{r}
 obj <- preprocess_companion_log(obj)
-
 ```
 
 Then we may remove wrong or mistaken trials.
