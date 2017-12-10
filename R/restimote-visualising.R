@@ -54,12 +54,32 @@ plot_trial_path <- function(obj, trialId){
 #' @param end time at which we shoudl stop plotting
 #'
 #' @return plot
-#' @export
-#'
 #' @examples
+#' 
+#' @export
 plot_path_time <- function(obj, start, end){
   plt <- create_plot(obj)
   df_log <- get_position_between(obj, start, end)
   plt <- plot_add_restimote_path(plt, df_log)
+  return(plt)
+}
+
+#' Adds specified points to the given plot
+#' 
+#' @param plot already created ggplot
+#' @param ls list with XY vectors. eg. (list(start = c(0, 0), end = C(10, 5)))
+#' @return modified plot
+#' 
+#' @export
+plot_add_points <- function(plt, ls, size = 4, color = "blue"){
+  list_names <- names(ls)
+  df <- data.frame(point.x = numeric(0), point.y = numeric(0), point.name = character(), stringsAsFactors = F)
+  for (i in 1:length(ls)){
+    df[i, 1] <- ls[[i]][1]
+    df[i, 2] <- ls[[i]][2]
+    df[i, 3] <- list_names[i]
+  }
+  plt <- plt + geom_point(data = df, aes(point.x, point.y), size = size, color = color) + 
+    geom_text(data = df, aes(point.x, point.y, label = point.name))
   return(plt)
 }
