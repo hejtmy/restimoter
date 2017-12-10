@@ -31,7 +31,7 @@ find_restimote_file <- function(dir, type, exp_timestamp = NULL){
   ptr <- create_log_search_pattern(type, exp_timestamp)
   logs <- list.files(dir, pattern = ptr, full.names = T)
   if(length(logs) < 1){
-    print(paste0("Could not find any ", type, " logs in ", directory))
+    print(paste0("Could not find any ", type, " logs in ", dir))
     return(NULL)
   }
   return(logs[1])
