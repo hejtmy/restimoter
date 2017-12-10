@@ -1,3 +1,22 @@
+#' Create a plot wiht constraints
+#' 
+#' @param obj RestimoteObject
+#' @return ggplot2 plot
+#' @example 
+#' plt <- create_plot(obj)
+#' 
+#' @export
+create_plot <- function(obj){
+  if(!requireNamespace("ggplot2", quietly = T)){
+    stop("Needs ggplot2 package")
+  }
+  plt <- ggplot2::ggplot()
+  if (!is.null(obj$map_limits)){
+    plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
+  }
+  return(plt)
+}
+
 #' plot entire path log from the restimote
 #'
 #' @param obj 
@@ -6,8 +25,9 @@
 #' @export
 #'
 #' @examples
-plot_path <- function(obj){
-  plot_walking_path(obj$log, obj$location_size)
+add_restimote_path <- function(plt, df_pos){
+  plt <- plt + geom_path(data = df_pos, aes(Position.X, Position.Y))
+  return(plt)
 }
 
 #' plots a single trial path
@@ -21,10 +41,11 @@ plot_path <- function(obj){
 #' @examples
 #' plot_trial_path(obj, 1)
 plot_trial_path <- function(obj, trialId){
+  plt <- create_plot(obj)
   df_trial_log <- get_position_trial(obj, trialId)
-  plot_walking_path(df_trial_log, obj$location_size)
+  plt <- add_restimote_path(plt, df_trial_log)
+  return(plt)
 }
-
 
 #' Plots path between two timepoints
 #'
@@ -37,6 +58,8 @@ plot_trial_path <- function(obj, trialId){
 #'
 #' @examples
 plot_path_time <- function(obj, start, end){
+  plt <- create_plot(obj)
   df_log <- get_position_between(obj, start, end)
-  plot_walking_path(df_trial_log, obj$location_size)
+  plt <- add_restimote_path(plt, df_log)
+  return(plt)
 }
