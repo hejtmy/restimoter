@@ -25,7 +25,7 @@ create_plot <- function(obj){
 #' @export
 #'
 #' @examples
-add_restimote_path <- function(plt, df_pos){
+plot_add_restimote_path <- function(plt, df_pos){
   plt <- plt + geom_path(data = df_pos, aes(Position.X, Position.Y))
   return(plt)
 }
@@ -43,7 +43,7 @@ add_restimote_path <- function(plt, df_pos){
 plot_trial_path <- function(obj, trialId){
   plt <- create_plot(obj)
   df_trial_log <- get_position_trial(obj, trialId)
-  plt <- add_restimote_path(plt, df_trial_log)
+  plt <- plot_add_restimote_path(plt, df_trial_log)
   return(plt)
 }
 
@@ -60,6 +60,6 @@ plot_trial_path <- function(obj, trialId){
 plot_path_time <- function(obj, start, end){
   plt <- create_plot(obj)
   df_log <- get_position_between(obj, start, end)
-  plt <- add_restimote_path(plt, df_log)
+  plt <- plot_add_restimote_path(plt, df_log)
   return(plt)
 }
