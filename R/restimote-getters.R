@@ -33,6 +33,23 @@ get_trial_times <- function(obj, trialId){
   return(ls)
 }
 
+#' 
+#'
+#' @param obj
+#' @param pointId which point you want
+#' @param viewpoint if set, only returns pointings from given viewpoint
+#' 
+#' @return list with start and end. for last trial, end is NA, as there is no finishing signal
+#' @export
+
+get_point_times <- function(obj, pointId, viewpoint = NULL){
+  if(!is_companion_preprocessed(obj)) return(NULL)
+  ls <- list()
+  ls$start <- obj$companion$Time[get_index_action_id(obj$companion, SHOULD_POINT, pointId)]
+  ls$end <- obj$companion$Time[get_index_action_id(obj$companion, SHOULD_POINT, pointId + 1)]
+  return(ls)
+}
+
 #' Gets number of times participant should point and pointed
 #'
 #' @param obj RestimoteObject
@@ -53,10 +70,11 @@ get_n_pointings <- function(obj){
 #' @param obj RestimoteObject
 #' @param trialId integer with valid trial id
 #'
-#' @return
-#' @export
+#' @return log line where participant pointed
+#' @export 
 #'
 #' @examples
 get_trial_point <- function(obj, trialId){
-  
+  get_trial_times()
+  i_pointed <- get_next_point_index(obj$log)
 }

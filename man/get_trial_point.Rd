@@ -11,6 +11,9 @@ get_trial_point(obj, trialId)
 
 \item{trialId}{integer with valid trial id}
 }
+\value{
+log line where participant pointed
+}
 \description{
 Gets the orientation of pointing in particular trial
 }

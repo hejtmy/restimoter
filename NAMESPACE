@@ -3,6 +3,7 @@
 export(RestimoteObject)
 export(create_plot)
 export(get_n_pointings)
+export(get_point_times)
 export(get_position_trial)
 export(get_trial_point)
 export(get_trial_times)

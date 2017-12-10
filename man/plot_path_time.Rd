@@ -19,3 +19,6 @@ plot
 \description{
 Plots path between two timepoints
 }
+\examples{
+
+}
