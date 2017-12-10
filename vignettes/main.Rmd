@@ -67,8 +67,6 @@ library(forecast)
 
 ```
 
-
-
 df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])
 df_estimote$angle.diff <- c(0, df_estimote$Orientation[2:n]-df_estimote$Orientation[1:n-1])
 
