@@ -45,3 +45,21 @@ load_restimote_companion_log <- function(log_path, exp_timestamp = NULL, obj = N
                               stringsAsFactors = F, skip = bottomHeaderIndex)
   return(obj)
 }
+
+#' Add locations
+#' 
+#' @param obj RestimoteObject
+#' @param name name of hte location
+#' @param x x position 
+#' @param y y position
+#' @return 
+#' @export 
+add_location <- function(obj, name, x, y){
+  if(is.null(obj$locations)){
+    obj$locations <- data.frame(name = name, x = x, y = y)
+    return(obj)
+  }
+  new <- data.frame(name = name, x = x, y = y)
+  obj$locations <- rbind(obj$locations, new)
+  return(obj)
+}
