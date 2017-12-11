@@ -23,14 +23,15 @@ get_index_time <- function(df, time){
   return(ids[1])
 }
 
-# Returns line where participant pointed
-get_next_point_index <- function(df_log, time, time_limit = 10){
-  pointings <- which(df_log$Action == POINTED & df_log$Time > time)
+# Returns index line where participant pointed - only a first one
+# times is a list with start and end field
+get_next_point_index <- function(obj, times){
+  first <- which(obj$log$Action == POINTED & obj$log$Time > times$start & obj$log$Time < times$end)
   if(length(first) == 0) {
     print("Couldn't find any points made after this time.")
     return(NULL)
   }
-  return(pointings[1])
+  return(first[1])
 }
 
 #returns row index for particular action and id

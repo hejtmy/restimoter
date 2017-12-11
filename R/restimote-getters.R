@@ -21,7 +21,7 @@ get_position_trial <- function(obj, trialId){
 #' @export
 #'
 #' @examples
-#' #TODO - redo to trial finishes
+# TODO - redo to trial finishes
 get_trial_times <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
@@ -42,8 +42,7 @@ get_trial_times <- function(obj, trialId){
 #' 
 #' @return list with start and end. for last trial, end is NA, as there is no finishing signal
 #' @export
-
-get_point_times <- function(obj, pointId, viewpoint = NULL){
+get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
   ls$start <- obj$companion$Time[get_index_action_id(obj, SHOULD_POINT, pointId)]
@@ -75,8 +74,10 @@ get_n_pointings <- function(obj){
 #' @export 
 #'
 #' @examples
-get_trial_point <- function(obj, trialId){
-  companion_point_time <- get_index_action_id()
-  i_pointed <- get_next_point_index(obj$log)
+get_trial_point_orientation <- function(obj, trialId){
+  times <- get_trial_point_times(obj, trialId)
+  i_pointed <- get_next_point_index(obj, times = times)
+  pointed_line <- obj$log[i_pointed, ]
+  return(pointed_line)
 }
 
