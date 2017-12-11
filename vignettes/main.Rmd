@@ -64,7 +64,6 @@ obj$map_limits <- list(x = c(0, 25), y = c(0, 25))
 #Smoothing
 ```{r}
 library(forecast)
-
 ```
 
 df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])

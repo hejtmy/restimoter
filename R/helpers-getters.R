@@ -13,6 +13,7 @@ get_position_between <- function(df_log, start, end){
   return(df_log[i_start:i_end, ])
 }
 
+# Returns index in df where time was larger than given time
 get_index_time <- function(df, time){
   ids <- which(df$Time > time)
   if(length(ids) == 0){
@@ -33,8 +34,8 @@ get_next_point_index <- function(df_log, time, time_limit = 10){
 }
 
 #returns row index for particular action and id
-get_index_action_id <- function(df, action, id){
-  id <- which(df$Action == action & df$Id == id)
+get_index_action_id <- function(obj, action, id){
+  id <- which(obj$companion$Action == action & obj$companion$Id == id)
   if(length(id) == 0){
     print("There isn't an event with this id")
     return(NULL)

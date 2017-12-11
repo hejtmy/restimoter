@@ -21,14 +21,15 @@ get_position_trial <- function(obj, trialId){
 #' @export
 #'
 #' @examples
+#' #TODO - redo to trial finishes
 get_trial_times <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
-  ls$start <- obj$companion$Time[get_index_action_id(obj$companion, NEW_TRIAL, trialId)]
+  ls$start <- obj$companion$Time[get_index_action_id(obj, NEW_TRIAL, trialId)]
   if(trialId == obj$n_trials - 1){
-    ls$end <- obj$companion$Time[get_index_action_id(obj$companion, NEW_SOP_VIEW, 1)]
+    ls$end <- obj$companion$Time[get_index_action_id(obj, NEW_SOP_VIEW, 1)]
   } else {
-    ls$end <- obj$companion$Time[get_index_action_id(obj$companion, NEW_TRIAL, trialId + 1)]
+    ls$end <- obj$companion$Time[get_index_action_id(obj, NEW_TRIAL, trialId + 1)]
   }
   return(ls)
 }
@@ -45,8 +46,8 @@ get_trial_times <- function(obj, trialId){
 get_point_times <- function(obj, pointId, viewpoint = NULL){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
-  ls$start <- obj$companion$Time[get_index_action_id(obj$companion, SHOULD_POINT, pointId)]
-  ls$end <- obj$companion$Time[get_index_action_id(obj$companion, SHOULD_POINT, pointId + 1)]
+  ls$start <- obj$companion$Time[get_index_action_id(obj, SHOULD_POINT, pointId)]
+  ls$end <- obj$companion$Time[get_index_action_id(obj, SHOULD_POINT, pointId + 1)]
   return(ls)
 }
 
@@ -75,6 +76,7 @@ get_n_pointings <- function(obj){
 #'
 #' @examples
 get_trial_point <- function(obj, trialId){
-  get_trial_times()
+  companion_point_time <- get_index_action_id()
   i_pointed <- get_next_point_index(obj$log)
 }
+
