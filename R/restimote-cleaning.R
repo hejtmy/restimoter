@@ -22,7 +22,8 @@ remove_random_points <- function(df_player, allowed_speed = 4){
 #' @export
 #'
 #' @examples
-true_trial_log < function(obj, trialId){
+true_trial_log <- function(obj, trialId){
+  BENEVOLENCE_INTERVAl <- 200 #length of benevolence when 
   start_pos <- get_start_position(obj, trialId)
   goal_pos <- get_goal_position(obj, trialId)
   # positions are shifted to the later times ... so we know that the trial definitely starte at 
@@ -31,4 +32,7 @@ true_trial_log < function(obj, trialId){
   #' finding the place that is the closest to the starting position ..... it might come sooner 
   #' than person really started this trial, but it doesn't matter, as times are calculated from a 
   #' differnet log - we need this for the distance summary
+  small_log <- get_position_between(obj$log, timewindow$start, timewindow$start + BENEVOLENCE_INTERVAl)
+  distances <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) euclid_distance(x, goal_pos))
+  
 }

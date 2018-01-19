@@ -76,7 +76,7 @@ plot_path_time <- function(obj, start, end){
 #'
 #' @examples 
 plot_add_trial_start_goal <- function(plt, obj, trialId){
-  ls <- list(goal = get_trial_goal_position(obj, trialId))
+  ls <- list(goal = get_goal_position(obj, trialId))
   if(is.null(ls$goal)) return(plt)
   plt <- plot_add_points(plt, ls, color = "green")
   return(plt)

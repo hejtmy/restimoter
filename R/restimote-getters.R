@@ -95,7 +95,7 @@ get_trial_point_orientation <- function(obj, trialId){
 #'
 #' @examples
 get_start_position <- function(obj, trialId){
-  if(trialId == 1) return(c(obj$log$Position.X, obj$log$Position.Y)) #returns STARTING POSITION AT the start of the expeiremnt
+  if(trialId == 1) return(c(obj$log$Position.X[1], obj$log$Position.Y[1])) #returns STARTING POSITION AT the start of the expeiremnt
   return(get_goal_position(obj, trialId - 1))
 }
 
