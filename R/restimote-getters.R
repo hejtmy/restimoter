@@ -80,3 +80,31 @@ get_trial_point_orientation <- function(obj, trialId){
   return(pointed_line)
 }
 
+#' returns vector 2 of x and Y position of trial start position
+#'
+#' @param obj RestimoteObject
+#' @param trialId integer with valid trial id
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_trial_start_position <- function(obj, trialId){
+  if(!check_goal_fields(obj)) return(NULL)
+  
+}
+
+#' returns vector 2 of x and Y position of trial goal position
+#'
+#' @param obj 
+#' @param trialId 
+#'
+#' @return vector 2 of x and Y of the goal position
+#' @export
+#'
+#' @examples get_trial_goal_position(obj, 30)
+get_trial_goal_position <- function(obj, trialId){
+  if(!check_goal_fields(obj)) return(NULL)
+  
+  
+}
