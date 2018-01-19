@@ -43,3 +43,28 @@ get_index_action_id <- function(obj, action, id){
   }
   return(id)
 }
+
+is_valid_trial <- function(obj, trialId){
+  if(trialId > obj$n_trials) return(FALSE)
+  return(TRUE)
+}
+
+check_goal_fields <- function(obj){
+  if(!has_goal_positions(obj)){
+    warning("There are no positions entered. Returning NULL")
+    return(FALSE)
+  }
+  if(!has_goal_order(obj)){
+    warning("There is no goal order entered. Returning NULL")
+    return(FALSE)
+  }
+  return(TRUE)
+}
+
+has_goal_positions <- function(obj){
+  return(is.data.frame(obj$goal_positions) && nrow(obj$goal_positions) > 1)
+}
+
+has_goal_order <- function(obj){
+  return(length(obj$goal_order) > 1 && !is.na(obj$goal_order))
+}
