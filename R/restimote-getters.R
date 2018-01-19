@@ -12,6 +12,11 @@ get_position_trial <- function(obj, trialId){
   return(df_log)
 }
 
+
+get_position_trial_smoothed <- function(obj, trialId){
+  
+}
+
 #' Colelcts start and end times for trial of particular id
 #'
 #' @param obj Restimote object
@@ -85,13 +90,27 @@ get_trial_point_orientation <- function(obj, trialId){
 #' @param obj 
 #' @param trialId 
 #'
+#' @return vector 2 of x and Y of the starting position
+#' @export 
+#'
+#' @examples
+get_start_position <- function(obj, trialId){
+  if(trialId == 1) return(c(obj$log$Position.X, obj$log$Position.Y)) #returns STARTING POSITION AT the start of the expeiremnt
+  return(get_goal_position(obj, trialId - 1))
+}
+
+#' returns vector 2 of x and Y position of trial goal position
+#'
+#' @param obj 
+#' @param trialId 
+#'
 #' @return vector 2 of x and Y of the goal position
 #' @export 
 #'
 #' @examples
-get_trial_goal_position <- function(obj, trialId){
+get_goal_position <- function(obj, trialId){
   if(!check_goal_fields(obj)) return(NULL)
-  if(!is_valid_trial(obj, trialId)) return(NULL)
+  if(!is_valid_trial(obj,trialId)) return(NULL)
   i_goal <- obj$goal_order[trialId]
   return(obj$goal_positions[i_goal, 2:3])
 
