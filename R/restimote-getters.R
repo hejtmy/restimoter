@@ -34,7 +34,7 @@ get_trial_times <- function(obj, trialId){
   return(ls)
 }
 
-#' 
+#' Returns of times when people were pointing
 #'
 #' @param obj
 #' @param pointId which point you want
@@ -80,31 +80,19 @@ get_trial_point_orientation <- function(obj, trialId){
   return(pointed_line)
 }
 
-#' returns vector 2 of x and Y position of trial start position
-#'
-#' @param obj RestimoteObject
-#' @param trialId integer with valid trial id
-#'
-#' @return
-#' @export
-#'
-#' @examples
-get_trial_start_position <- function(obj, trialId){
-  if(!check_goal_fields(obj)) return(NULL)
-  
-}
-
 #' returns vector 2 of x and Y position of trial goal position
 #'
 #' @param obj 
 #' @param trialId 
 #'
 #' @return vector 2 of x and Y of the goal position
-#' @export
+#' @export 
 #'
-#' @examples get_trial_goal_position(obj, 30)
+#' @examples
 get_trial_goal_position <- function(obj, trialId){
   if(!check_goal_fields(obj)) return(NULL)
-  
-  
+  if(!is_valid_trial(obj, trialId)) return(NULL)
+  i_goal <- obj$goal_order[trialId]
+  return(obj$goal_positions[i_goal, 2:3])
+
 }

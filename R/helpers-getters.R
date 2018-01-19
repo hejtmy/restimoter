@@ -45,7 +45,10 @@ get_index_action_id <- function(obj, action, id){
 }
 
 is_valid_trial <- function(obj, trialId){
-  if(trialId > obj$n_trials) return(FALSE)
+  if(trialId > obj$n_trials){
+    warning("you are passing trial number larger than number of trials overall.")
+    return(FALSE)
+  }
   return(TRUE)
 }
 
