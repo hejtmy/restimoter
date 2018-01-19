@@ -14,5 +14,7 @@ RestimoteObject <- function(){
   obj$location_size <- NA
   obj$log <- NA
   obj$companion <- NA
+  obj$goal_positions <- NA
+  obj$goal_order <- NA
   return(obj)
 }

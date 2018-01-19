@@ -56,7 +56,6 @@ get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
 #'
 #' @return list with log, companion fields
 #' @export
-
 get_n_pointings <- function(obj){
   ls <- list()
   ls$log <- get_n_events(obj$log, POINTED)

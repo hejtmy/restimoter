@@ -12,7 +12,6 @@ preprocess_companion_log <- function(obj){
   return(obj)
 }
 
-
 #' Preprocesses and returns restimote log
 #'
 #' @param obj 
@@ -77,5 +76,35 @@ remove_companion_ids <- function(obj, action, ids){
   should_remove <- (obj$companion$Action == action & (obj$companion$Id %in% ids))
   obj$companion <- obj$companion[!should_remove, ]
   obj$companion <- add_actions_ids(obj$companion)
+  return(obj)
+}
+
+#' Adds goal positions to the restimote object
+#' 
+#' @param obj Restimote object. 
+#' @param positions Data frame with goal positions. eg. Needs to have name, position.x and position.y columns 
+#'
+#' @return RestimoteObject with goal positions field
+#'
+#' @export
+add_goal_positions <- function(obj, positions){
+  #some validations in the future
+  obj$goal_positions <- positions
+  return(obj)
+}
+
+#' Adds goal order vector to determine in what order goals came
+#'
+#' @param obj Restimote object
+#' @param order vector of goal order. eg. (1, 3, 5, 1) 
+#'
+#' @return RestimoteObject with added field
+#' @export
+#'
+#' @examples 
+add_goal_order <- function(obj, order){
+  #validate numebr of goals
+  #validate if numbers
+  obj$goal_order <- order
   return(obj)
 }
