@@ -48,6 +48,27 @@ plot_trial_path <- function(obj, trialId){
   return(plt)
 }
 
+#' Plots path as calculated by the true trial log, rather than by given timestamps
+#'
+#' @param obj 
+#' @param trialId 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+plot_true_trial_path <- function(obj, trialId){
+  df_trial_log <- true_trial_log(obj, trialId, radius = 5)
+  if(is.null(df_trial_log)) {
+    print("Never reached those points")
+    return(plot_trial_path(obj, trialId))
+  }
+  plt <- create_plot(obj) 
+  plt <- plot_add_restimote_path(plt, df_trial_log)
+  plt <- plot_add_trial_start_goal(plt, obj, trialId)
+  return(plt)
+}
+
 #' Plots path between two timepoints
 #'
 #' @param obj RestimoteObject
@@ -76,7 +97,7 @@ plot_path_time <- function(obj, start, end){
 #'
 #' @examples 
 plot_add_trial_start_goal <- function(plt, obj, trialId){
-  ls <- list(goal = get_goal_position(obj, trialId))
+  ls <- list(goal = get_goal_position(obj, trialId), start = get_start_position(obj, trialId))
   if(is.null(ls$goal)) return(plt)
   plt <- plot_add_points(plt, ls, color = "green")
   return(plt)

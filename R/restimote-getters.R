@@ -113,5 +113,4 @@ get_goal_position <- function(obj, trialId){
   if(!is_valid_trial(obj,trialId)) return(NULL)
   i_goal <- obj$goal_order[trialId]
   return(obj$goal_positions[i_goal, 2:3])
-
 }

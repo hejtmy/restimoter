@@ -6,12 +6,19 @@
 companion log but in respect to when player achieved started at the start 
 and when they reached given goal - times are incorrect, but path shoudl correspond}
 \usage{
-true_trial_log(obj, trialId)
+true_trial_log(obj, trialId, benevolence = 30, radius = 2)
 }
 \arguments{
 \item{obj}{Preprocessed Restimote object}
 
-\item{trialID}{valid id of the trial}
+\item{trialId}{}
+
+\item{benevolence}{how much time after the trial ended you give the function to search (default 30s)}
+
+\item{radius}{what radius around goal position do you consider arriving at the goal position? (defualt 2 meters)}
+}
+\value{
+log with the trial from the beginning to the
 }
 \description{
 Goes through the restimote log and defines trials not in respect to the 
