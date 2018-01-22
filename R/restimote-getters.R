@@ -12,11 +12,6 @@ get_position_trial <- function(obj, trialId){
   return(df_log)
 }
 
-
-get_position_trial_smoothed <- function(obj, trialId){
-  
-}
-
 #' Colelcts start and end times for trial of particular id
 #'
 #' @param obj Restimote object
