@@ -1,5 +1,32 @@
 #' Title
 #'
+#' @param log Data framew with Position.X and Position.Y column 
+#' @param points necessary if choosing median smoothing
+#' @param type median, approx, spline
+#'
+#' @return log with smoothed X and Y columns
+#' @export
+#'
+#' @examples
+smooth_positions <- function(log, type = "median", points = 11){
+  # running median
+  if(type == "median"){
+    log$Position.X <- runmed(log$Position.X, points, endrule = "constant")
+    log$Position.Y <- runmed(log$Position.Y, points, endrule = "constant")
+  }
+  if(type == "approx"){
+    log$Position.X  <- approx(log$Position.X)
+    log$Position.Y <- approx(log$Position.Y)
+  }
+  if(type == "spline"){
+    log$Position.X  <- smooth.spline(log$Position.X)$y
+    log$Position.Y <- smooth.spline(log$Position.Y)$y
+  }
+  return(log)
+}
+
+#' Title
+#'
 #' @param df_player data fram withg player position
 #' @param allowed_speed what is the maximum allowed sppeed before it is assumed to be artifact
 #'
