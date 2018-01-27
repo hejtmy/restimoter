@@ -14,7 +14,8 @@ Depends:
 Suggests:
   testthat,
   knitr,
-  rmarkdown
+  rmarkdown,
+  grid
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Imports: 

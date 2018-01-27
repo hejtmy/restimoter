@@ -10,7 +10,7 @@ plot_add_restimote_path(plt, df_pos)
 \item{obj}{}
 }
 \value{
-plot with walked path
+ggplot2 plot with walked path
 }
 \description{
 plot entire path log from the restimote

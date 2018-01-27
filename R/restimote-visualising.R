@@ -21,7 +21,7 @@ create_plot <- function(obj){
 #'
 #' @param obj 
 #'
-#' @return plot with walked path
+#' @return ggplot2 plot with walked path
 #' @export
 #'
 #' @examples
@@ -46,6 +46,28 @@ plot_trial_path <- function(obj, trialId){
   plt <- plot_add_restimote_path(plt, df_trial_log)
   plt <- plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
+}
+
+#' Title
+#'
+#' @param obj 
+#' @param columns 
+#' @param indices 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+plot_trials_paths <- function(obj, columns = 5, indices = c()){
+  if(!requireNamespace("grid", quietly = T)){
+    stop("Cannot continue without grid")
+  }
+  indices <- if (length(indices) == 0) 1:obj$n_trials else indices
+  plots <- list()
+  for(i in 1:length(indices)){
+    plots[[i]] <- plot_true_trial_path(obj, indices[i])
+  }
+  multiplot(plots, cols = columns)
 }
 
 #' Plots path as calculated by the true trial log, rather than by given timestamps
