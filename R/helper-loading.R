@@ -1,6 +1,6 @@
 # Helper loading functions
 
-create_separator = function(string){
+create_separator <- function(string){
   ls <- list()
   ls$beginning <- paste("\\*\\*\\*\\",string, "\\*\\*\\*", sep="")
   ls$end <- paste("\\-\\-\\-",string, "\\-\\-\\-", sep="")
@@ -37,19 +37,19 @@ find_restimote_file <- function(dir, type, exp_timestamp = NULL){
   return(logs[1])
 }
 
-get_json_between = function(text, string){
+get_json_between <- function(text, string){
   ls <- json_to_list(get_text_between(text, string))
   return(ls)
 }
 
-get_indicies_between = function(text, string){
+get_indicies_between <- function(text, string){
   ls <- list()
   ls$beginning <- which(grepl(create_separator(string)$beginning, text))
   ls$end <- which(grepl(create_separator(string)$end, text))
   return(ls)
 }
 
-get_text_between = function(text, string){
+get_text_between <- function(text, string){
   indices <- get_indicies_between(text, string)
   if (length(indices$beginning) != 1 || length(indices$end) != 1) return (NULL)
   text <- text[(indices$beginning + 1):(indices$end - 1)]
