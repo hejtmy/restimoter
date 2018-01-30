@@ -53,7 +53,7 @@ plot_true_trial_path <- function(obj, trialId){
     print("Never reached those points")
     return(plot_trial_path(obj, trialId))
   }
-  plt <- create_plot(obj) 
+  plt <- navr::create_plot(obj) 
   plt <- navr::plot_add_path(plt, df_trial_log)
   plt <- plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
