@@ -9,7 +9,7 @@ add_actions_ids <- function(df){
 }
 
 add_walked_distance <- function(obj){
-  obj$log$distance <- euclid_distance_col(data.frame(obj$log$Position.X, obj$log$Position.Y))
+  obj$log$distance <- navr::euclid_distance_between_rows(data.frame(obj$log$Position.X, obj$log$Position.Y))
   return(obj)
 }
 

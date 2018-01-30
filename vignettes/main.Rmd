@@ -70,7 +70,7 @@ df_estimote$time.diff <- c(0, df_estimote$Time[2:n]-df_estimote$Time[1:n-1])
 df_estimote$angle.diff <- c(0, df_estimote$Orientation[2:n]-df_estimote$Orientation[1:n-1])
 
 points <- data.matrix(df_estimote[2:3])
-df_estimote$position.diff <- euclid_distance_col(points)
+df_estimote$position.diff <- navr::euclid_distance_between_rows(points)
 
 df_estimote$speed <- df_estimote$position.diff/df_estimote$time.diff
 

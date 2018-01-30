@@ -61,8 +61,8 @@ true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   #' than person really started this trial, but it doesn't matter, as times are calculated from a 
   #' differnet log - we need this for the distance summary
   small_log <- get_position_between(obj$log, timewindow$start, timewindow$end + benevolence)
-  distances_start <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) euclid_distance(x, start_pos))
-  distances_goal <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) euclid_distance(x, goal_pos))
+  distances_start <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) navr::euclid_distance(x, start_pos))
+  distances_goal <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) navr::euclid_distance(x, goal_pos))
   i_close_to_start <- NA
   i_close_to_goal <- NA
   for(rad in seq(0.5, radius, 0.25)){

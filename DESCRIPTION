@@ -9,6 +9,8 @@ Description: This package comes with functions to load, preprocess
   if you have trouble reading it.
 License: MIT
 LazyData: true
+Remotes: 
+  hejtmy/navr
 Depends:
   R (>= 3.1.0)
 Suggests:
@@ -18,7 +20,10 @@ Suggests:
   grid
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-Imports: 
+Imports:
+  navr,
   jsonlite,
   stringr,
   ggplot2
+
+
