@@ -14,7 +14,7 @@ plot_trial_path <- function(obj, trialId){
     plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
   }
   df_trial_log <- get_position_trial(obj, trialId)
-  plt <- navr::plot_add_path(plt, df_trial_log)
+  plt <- navr::plot_add_path(plt, df_trial_log$Position.X, df_trial_log$Position.Y)
   plt <- plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
 }
@@ -57,7 +57,7 @@ plot_true_trial_path <- function(obj, trialId){
   if(!is.null(obj$map_limits)){
     plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
   }
-  plt <- navr::plot_add_path(plt, df_trial_log)
+  plt <- navr::plot_add_path(plt, df_trial_log$Position.X, df_trial_log$Position.Y)
   plt <- plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
 }
@@ -75,7 +75,7 @@ plot_true_trial_path <- function(obj, trialId){
 plot_path_time <- function(obj, start, end){
   plt <- navr::create_plot(obj)
   df_log <- get_position_between(obj, start, end)
-  plt <- navr::plot_add_path(plt, df_log)
+  plt <- navr::plot_add_path(plt, df_log$Position.X, df_log$Position.Y)
   return(plt)
 }
 
