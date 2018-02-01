@@ -16,5 +16,6 @@ RestimoteObject <- function(){
   obj$companion <- NA
   obj$goal_positions <- NA
   obj$goal_order <- NA
+  class(obj) <- append(class(obj), "restimote")
   return(obj)
 }
