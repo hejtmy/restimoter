@@ -98,7 +98,7 @@ add_goal_positions <- function(obj, positions){
 #' @param obj Restimote object
 #' @param order vector of goal order. eg. (1, 3, 5, 1) 
 #'
-#' @return RestimoteObject with added field
+#' @return RestimoteObject witha added field
 #' @export
 #'
 #' @examples 

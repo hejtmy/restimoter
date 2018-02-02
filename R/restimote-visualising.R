@@ -1,35 +1,30 @@
 #' plots a single trial path
 #'
 #' @param obj RestimoteObject Needs to be preprocessed
-#' @param trialId integed of given trial
+#' @param trialId vector integer of given trial
 #'
 #' @return prints plot
 #' @export 
 #' @import ggplot2
 #' @examples
 #' plot_trial_path(obj, 1)
-plot_trial_path <- function(obj, trialId){
+plot_trial_path.restimote <- function(obj, trialId, until_reached = T){
+  if(length(trialId) == 1) return(restimote.plot_trial_path(obj, trialId, until_reached))
+  if(length(trialId) > 1) return(restimote.plot_trials_paths(obj, indices = trialId, until_reached))
+}
+
+restimote.plot_trial_path <- function(obj, trialId, until_reached = T){
   plt <- navr::create_plot()
   if(!is.null(obj$map_limits)){
     plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
   }
   df_trial_log <- get_position_trial(obj, trialId)
   plt <- navr::plot_add_path(plt, df_trial_log$Position.X, df_trial_log$Position.Y)
-  plt <- plot_add_trial_start_goal(plt, obj, trialId)
+  plt <- restimoter.plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
 }
 
-#' Title
-#'
-#' @param obj 
-#' @param columns 
-#' @param indices 
-#'
-#' @return
-#' @export
-#'
-#' @examples
-plot_trials_paths <- function(obj, columns = 5, indices = c()){
+restimote.plot_trials_paths <- function(obj, columns = 5, indices = c(), until_reached = T){
   indices <- if (length(indices) == 0) 1:obj$n_trials else indices
   plots <- list()
   for(i in 1:length(indices)){
@@ -58,7 +53,7 @@ plot_true_trial_path <- function(obj, trialId){
     plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
   }
   plt <- navr::plot_add_path(plt, df_trial_log$Position.X, df_trial_log$Position.Y)
-  plt <- plot_add_trial_start_goal(plt, obj, trialId)
+  plt <- restimoter.plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)
 }
 
@@ -72,7 +67,7 @@ plot_true_trial_path <- function(obj, trialId){
 #' @examples
 #' 
 #' @export
-plot_path_time <- function(obj, start, end){
+plot_path_time.restimoter <- function(obj, start, end){
   plt <- navr::create_plot(obj)
   df_log <- get_position_between(obj, start, end)
   plt <- navr::plot_add_path(plt, df_log$Position.X, df_log$Position.Y)
@@ -86,10 +81,10 @@ plot_path_time <- function(obj, start, end){
 #' @param trialId valid trialID
 #'
 #' @return plot
-#' @export
 #'
-#' @examples 
-plot_add_trial_start_goal <- function(plt, obj, trialId){
+#' @examples
+#' @noRd
+restimoter.plot_add_trial_start_goal <- function(plt, obj, trialId){
   ls <- list(goal = get_goal_position(obj, trialId), start = get_start_position(obj, trialId))
   if(is.null(ls$goal)) return(plt)
   plt <- navr::plot_add_points(plt, ls, color = "green")
