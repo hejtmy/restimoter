@@ -18,7 +18,7 @@ restimote.plot_trial_path <- function(obj, trialId, until_reached = T){
   if(!is.null(obj$map_limits)){
     plt <- plt + xlim(obj$map_limits$x) + ylim(obj$map_limits$y)
   }
-  df_trial_log <- get_position_trial(obj, trialId)
+  df_trial_log <- get_trial_log.restimote(obj, trialId)
   plt <- navr::plot_add_path(plt, df_trial_log$Position.X, df_trial_log$Position.Y)
   plt <- restimoter.plot_add_trial_start_goal(plt, obj, trialId)
   return(plt)

@@ -4,7 +4,7 @@
 \alias{plot_trial_path.restimote}
 \title{plots a single trial path}
 \usage{
-plot_trial_path.restimote(obj, trialId)
+\method{plot_trial_path}{restimote}(obj, trialId, until_reached = T)
 }
 \arguments{
 \item{obj}{RestimoteObject Needs to be preprocessed}

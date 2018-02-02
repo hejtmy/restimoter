@@ -6,7 +6,7 @@
 #' @return log data.frame with only rows from during the trial
 #' 
 #' @export
-get_position_trial <- function(obj, trialId){
+get_trial_log.restimote <- function(obj, trialId){
   timewindow <- get_trial_times(obj, trialId)
   df_log <- get_position_between(obj$log, timewindow$start, timewindow$end)
   return(df_log)
