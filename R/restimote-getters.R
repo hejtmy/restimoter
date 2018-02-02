@@ -22,7 +22,7 @@ get_trial_log.restimote <- function(obj, trialId){
 #'
 #' @examples
 # TODO - redo to trial finishes
-get_trial_times.restimoter <- function(obj, trialId){
+get_trial_times.restimote <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
   ls$start <- obj$companion$Time[get_index_action_id(obj, NEW_TRIAL, trialId)]

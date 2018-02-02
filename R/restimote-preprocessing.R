@@ -87,7 +87,7 @@ remove_companion_ids <- function(obj, action, ids){
 #' @return RestimoteObject with goal positions field
 #'
 #' @export
-add_goal_positions.restimoter <- function(obj, positions){
+add_goal_positions.restimote <- function(obj, positions){
   #some validations in the future
   obj$goal_positions <- positions
   return(obj)
@@ -102,7 +102,7 @@ add_goal_positions.restimoter <- function(obj, positions){
 #' @export
 #'
 #' @examples 
-add_goal_order.restimoter <- function(obj, order){
+add_goal_order.restimote <- function(obj, order){
   #validate numebr of goals
   #validate if numbers
   obj$goal_order <- order
