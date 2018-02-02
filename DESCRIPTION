@@ -12,7 +12,8 @@ LazyData: true
 Remotes: 
   hejtmy/navr
 Depends:
-  R (>= 3.1.0)
+  R (>= 3.1.0),
+  navr
 Suggests:
   testthat,
   knitr,
