@@ -26,7 +26,7 @@ get_index_time <- function(df, time){
 # Returns index line where participant pointed - only a first one
 # times is a list with start and end field
 get_next_point_index <- function(obj, times){
-  if(is.na(times$end)) times$end <- Inf #last trial
+  if(is.null(times$end)) times$end <- times$start + 100 #last trial
   first <- which(obj$log$Action == POINTED & obj$log$Time > times$start & obj$log$Time < times$end)
   if(length(first) == 0) {
     print("Couldn't find any points made after this time.")
