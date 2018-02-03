@@ -1,4 +1,5 @@
 NEW_TRIAL <- "New trial"
+FINISH_TRIAL <- "Finish trial"
 SHOULD_POINT <- "Should point"
 POINTED <- "pointed"
 NEW_SOP_VIEW <- "SOP new view"

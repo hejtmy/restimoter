@@ -26,11 +26,7 @@ get_trial_times.restimote <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
   ls$start <- obj$companion$Time[get_index_action_id(obj, NEW_TRIAL, trialId)]
-  if(trialId == obj$n_trials - 1){
-    ls$end <- obj$companion$Time[get_index_action_id(obj, NEW_SOP_VIEW, 1)]
-  } else {
-    ls$end <- obj$companion$Time[get_index_action_id(obj, NEW_TRIAL, trialId + 1)]
-  }
+  ls$end <- obj$companion$Time[get_index_action_id(obj, FINISH_TRIAL, trialId)]
   return(ls)
 }
 
