@@ -131,6 +131,6 @@ calibrate_compass <- function(obj, estimote_offset){
     obj$log <- correct_compass_offset(obj$log, estimote_offset, offset)
   }
   if(!is.null(obj$companion)){
-    get_action
+    get_action_times(obj, "Calibrate")
   }
 }

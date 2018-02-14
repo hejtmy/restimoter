@@ -40,9 +40,10 @@ get_trial_times.restimote <- function(obj, trialId){
 #' @export
 get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
   if(!is_companion_preprocessed(obj)) return(NULL)
+  point_interval <- get_trial_point_interval(obj, pointId)
   ls <- list()
-  ls$start <- get_action_times(obj, SHOULD_POINT, pointId) #whatever action after that
-  ls$end <- ifelse(nrow(obj$companion) > i_point, obj$companion$Time[i_point+1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  ls$start <- point_interval$start
+  next_point <- get_next_point_index(obj, point_interval)
   return(ls)
 }
 
@@ -65,15 +66,16 @@ get_n_pointings <- function(obj){
 #' @param obj RestimoteObject
 #' @param trialId integer with valid trial id
 #'
-#' @return log line where participant pointed
+#' @return orientation fo the participant when they pointed
 #' @export 
 #'
 #' @examples
 get_trial_point_orientation <- function(obj, trialId){
   times <- get_trial_point_times(obj, trialId)
-  i_pointed <- get_next_point_index(obj, times = times)
+  i_pointed <- get_next_point_index(obj, times$start, times$end)
+  if(is.null(i_pointed)) return(NA)
   pointed_line <- obj$log[i_pointed, ]
-  return(pointed_line)
+  return(pointed_line$Orientation)
 }
 
 #' returns vector 2 of x and Y position of trial goal position

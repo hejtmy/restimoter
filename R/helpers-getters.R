@@ -23,17 +23,26 @@ get_time_row <- function(df, time){
   return(ids[1])
 }
 
+get_trial_point_interval <- function(obj, pointId){
+  if(!is_companion_preprocessed(obj)) return(NULL)
+  ls <- list()
+  ls$start <- get_action_times(obj, SHOULD_POINT, pointId) #whatever action after that
+  ls$end <- ifelse(nrow(obj$companion) > i_point, obj$companion$Time[i_point+1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  return(ls)
+}
+
 # Returns index line where participant pointed - only a first one
 # times is a list with start and end field
-get_next_point_index <- function(obj, times){
-  if(is.null(times$end)) times$end <- times$start + 100 #last trial
-  first <- which(obj$log$Action == POINTED & obj$log$Time > times$start & obj$log$Time < times$end)
-  if(length(first) == 0) {
+get_next_point_index <- function(obj, start, end = NULL){
+  if(is.null(end)) end <- start + 100 #last trial
+  first_point <- which(obj$log$Action == POINTED & obj$log$Time > start & obj$log$Time < end)
+  if(length(first_point) == 0) {
     print("Couldn't find any points made after this time.")
     return(NULL)
   }
-  return(first[1])
+  return(first_point[1])
 }
+
 #' Returns indices of rows when certain action occured
 #' ids are which order of action you want to extract ... e.g. second "Calibrate" action row would be 
 #' get_action_rows(obj, "Calibrate", 2)
