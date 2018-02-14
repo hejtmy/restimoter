@@ -41,8 +41,9 @@ get_trial_times.restimote <- function(obj, trialId){
 get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
-  ls$start <- obj$companion$Time[get_index_action_id(obj, SHOULD_POINT, pointId)]
-  ls$end <- obj$companion$Time[get_index_action_id(obj, SHOULD_POINT, pointId + 1)]
+  i_point <- get_index_action_id(obj, SHOULD_POINT, pointId) #index of pointing action in companion log
+  ls$start <- obj$companion$Time[i_point] #whatever action after that
+  ls$end <- ifelse(nrow(obj$companion) > i_point, obj$companion$Time[i_point+1], ls$end <- tail(obj$log$Time, 1)) #last pointing
   return(ls)
 }
 
