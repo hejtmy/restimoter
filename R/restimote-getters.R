@@ -1,3 +1,35 @@
+#' Returns log object with positions during the experiment
+#'
+#' @param obj 
+#'
+#' @return data.frame with the log
+#' @export
+#'
+#' @examples
+get_log.restimote <- function(obj){
+  return(obj$log)
+}
+
+#' Returns log from particular time to another time
+#'
+#' @param obj Restimote object with log loaded
+#' @param start Starting time of the log
+#' @param end last accepable time of the log
+#'
+#' @return data.frame participant log
+#' @export
+#'
+#' @examples
+get_log_timewindow.restimote <- function(obj, start, end){
+  log <- get_log(obj)
+  i_start <- get_time_row(df_log, start)
+  i_end <- get_time_row(df_log, end)
+  if(is.null(i_start) || is.null(i_end)){
+    return(NULL)
+  }
+  return(df_log[i_start:i_end, ])
+}
+
 #' Gets position data inside trial
 #' 
 #' @param obj RestimoteObject object
@@ -7,8 +39,8 @@
 #' 
 #' @export
 get_trial_log.restimote <- function(obj, trialId){
-  timewindow <- get_trial_times(obj, trialId)
-  df_log <- get_position_between(obj$log, timewindow$start, timewindow$end)
+  timewindow <- get_trial_times.restimote(obj, trialId)
+  df_log <- get_log_timewindow.restimote(obj$log, timewindow$start, timewindow$end)
   return(df_log)
 }
 

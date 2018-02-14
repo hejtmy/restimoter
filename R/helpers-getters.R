@@ -4,18 +4,11 @@ get_n_actions <- function(df, action){
   return(n_trials)
 }
 
-get_position_between <- function(df_log, start, end){
-  i_start <- get_time_row(df_log, start)
-  i_end <- get_time_row(df_log, end)
-  if(is.null(i_start) || is.null(i_end)){
-    return(NULL)
-  }
-  return(df_log[i_start:i_end, ])
-}
+
 
 # Returns index in df where time was larger than given time
 get_time_row <- function(df, time){
-  ids <- which(df$Time > time)
+  ids <- which(df$Time >= time)
   if(length(ids) == 0){
     print("Couldn't find any recordings made after this time.")
     return(NULL)

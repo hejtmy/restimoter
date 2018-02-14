@@ -30,12 +30,20 @@ is_log_preprocessed <- function(obj){
   
 }
 
+correct_compass_offset <- function(df_log, compass_shows, compass_should_be){
+  compass_difference <- compass_should_be - compass_shows
+  df_log$Orientation <- angle_to_360(df_log$Orientation - compass_difference)
+  return(df_log)
+}
+
 calibrate_compass_offset <- function(obj){
   n_calibrations <- get_n_actions(obj$companion, "Calibrate")
   print(paste0("Threre are ", n_calibrations, " calibration points"))
   for(i in 1:n_calibrations){
     calib_interval <- get_action_interval(obj, "Calibrate", i)
-    
+    point_orientation <- get_point_orientation(obj, calib_interval$start, calib_interval$end)
+    get_log_timewindow(calib_interval$start, )
+    obj$log <- correct_compass_offset(df_log, point_orientation, 0)
   }
   return(obj)
 }

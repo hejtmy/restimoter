@@ -128,9 +128,9 @@ calibrate_compass <- function(obj, estimote_offset){
   offset <- obj$info$compass_offset
   if(!is.null(offset)){
     print(paste0("Correcting compass offset of", offset, " to match original ", estimote_offset, "."))
-    obj$log <- correct_starting_compass_offset(obj$log, estimote_offset, offset)
+    obj$log <- correct_compass_offset(obj$log, offset, estimote_offset)
   }
   if(!is.null(obj$companion)){
-    obj$log <- calibrate_compass_offset(obj$log, estimote_offset)
+    obj$log <- calibrate_compass(obj, estimote_offset)
   }
 }
