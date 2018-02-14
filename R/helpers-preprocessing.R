@@ -37,10 +37,13 @@ correct_compass_offset <- function(df_log, compass_shows, compass_should_be){
 }
 
 point_compass_calibrations <- function(obj){
+  LENIENCE <- 2 #given calibration shouldn't be preceded by pointing, we give a lenience of -2 seconds when participatn 
+  #can point earlier than researcher presses the calibrate button
   n_calibrations <- get_n_actions(obj$companion, "Calibrate")
   print(paste0("Threre are ", n_calibrations, " calibration points"))
   for(i in 1:n_calibrations){
     calib_interval <- get_action_interval(obj, "Calibrate", i)
+    calib_interval$start <- calib_interval$start - LENIENCE
     point_orientation <- get_point_orientation(obj, calib_interval$start, calib_interval$end)
     #Correction only from the calibration forth
     i_point <- get_next_point_index(obj, calib_interval$start, calib_interval$end)
