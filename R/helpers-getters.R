@@ -5,8 +5,8 @@ get_n_events <- function(df, event){
 }
 
 get_position_between <- function(df_log, start, end){
-  i_start <- get_index_time(df_log, start)
-  i_end <- get_index_time(df_log, end)
+  i_start <- get_time_row(df_log, start)
+  i_end <- get_time_row(df_log, end)
   if(is.null(i_start) || is.null(i_end)){
     return(NULL)
   }
@@ -14,7 +14,7 @@ get_position_between <- function(df_log, start, end){
 }
 
 # Returns index in df where time was larger than given time
-get_index_time <- function(df, time){
+get_time_row <- function(df, time){
   ids <- which(df$Time > time)
   if(length(ids) == 0){
     print("Couldn't find any recordings made after this time.")
@@ -34,15 +34,22 @@ get_next_point_index <- function(obj, times){
   }
   return(first[1])
 }
+#' Returns indices of rows when certain action occured
+#' ids are which order of action you want to extract ... e.g. second "Calibrate" action row would be 
+#' get_action_rows(obj, "Calibrate", 2)
+get_action_rows <- function(obj, action, ids = NULL){
+  action_rows <- which(obj$companion$Action == action)
+  if(is.null(ids)) return(action_rows)
+  n_actions <- length(action_rows)
+  if(all(ids %in% 1:n_actions)) return(action_rows[ids])
+  print(paste0("You required actions ", ids, ", but only ", n_actions, "are present"))
+  return(NULL)
+}
 
-#returns row index for particular action and id
-get_index_action_id <- function(obj, action, id){
-  id <- which(obj$companion$Action == action & obj$companion$Id == id)
-  if(length(id) == 0){
-    print("There isn't an event with this id")
-    return(NULL)
-  }
-  return(id)
+get_action_times <- function(obj, action, ids = NULL){
+  i_action <- get_action_rows(obj, action, ids)
+  if(length(i_action) != 0) return(obj$companion$Time[i_action])
+  return(NULL)
 }
 
 is_valid_trial <- function(obj, trialId){
