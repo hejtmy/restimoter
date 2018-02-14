@@ -4,7 +4,6 @@ get_n_actions <- function(df, action){
   return(n_trials)
 }
 
-
 # Returns index in df where time was larger than given time
 get_time_row <- function(df, time){
   ids <- which(df$Time >= time)
@@ -34,9 +33,9 @@ get_next_point_index <- function(obj, start, end = NULL){
   return(first_point[1])
 }
 
-#' Returns indices of rows when certain action occured
-#' ids are which order of action you want to extract ... e.g. second "Calibrate" action row would be 
-#' get_action_rows(obj, "Calibrate", 2)
+# Returns indices of rows when certain action occured
+# ids are which order of action you want to extract ... e.g. second "Calibrate" action row would be 
+# get_action_rows(obj, "Calibrate", 2)
 get_action_rows <- function(obj, action, ids = NULL){
   action_rows <- which(obj$companion$Action == action)
   if(is.null(ids)) return(action_rows)

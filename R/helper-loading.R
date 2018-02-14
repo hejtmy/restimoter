@@ -5,6 +5,7 @@
 #' @param data_field where to save parsed table
 #' @param exp_timestamp 
 #' @param obj either 
+#' @noRd
 load_restimote_generic_log <- function(log_path, log_type, data_field, exp_timestamp = NULL, obj = NULL){
   # if we didn't pass a file to load
   if(!is_directory(log_path)){

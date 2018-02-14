@@ -7,9 +7,9 @@
 get_goal_position(obj, trialId)
 }
 \arguments{
-\item{obj}{}
+\item{obj}{Restimote object}
 
-\item{trialId}{}
+\item{trialId}{what trial}
 }
 \value{
 vector 2 of x and Y of the goal position

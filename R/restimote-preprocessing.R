@@ -119,11 +119,12 @@ add_goal_order.restimote <- function(obj, order){
 #' @param obj RestimoteObject
 #' @param estimote_offset Offset of the map as set in the estimote Layout
 #'
-#' @return estimote object
+#' @return restimote object
 #' @export
 #'
-#' @examples 
+#' @examples
 #' obj <- calibrate_compass(obj, 321)
+#' 
 calibrate_compass <- function(obj, estimote_offset){
   offset <- obj$info$compass_offset
   if(!is.null(offset)){
@@ -131,6 +132,7 @@ calibrate_compass <- function(obj, estimote_offset){
     obj$log <- correct_compass_offset(obj$log, offset, estimote_offset)
   }
   if(!is.null(obj$companion)){
-    obj$log <- calibrate_compass(obj, estimote_offset)
+    obj <- point_compass_calibrations(obj)
   }
+  return(obj)
 }

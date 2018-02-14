@@ -21,12 +21,10 @@ get_log.restimote <- function(obj){
 #'
 #' @examples
 get_log_timewindow.restimote <- function(obj, start, end){
-  log <- get_log(obj)
+  df_log <- get_log(obj)
   i_start <- get_time_row(df_log, start)
   i_end <- get_time_row(df_log, end)
-  if(is.null(i_start) || is.null(i_end)){
-    return(NULL)
-  }
+  if(is.null(i_start) || is.null(i_end)) return(NULL)
   return(df_log[i_start:i_end, ])
 }
 
