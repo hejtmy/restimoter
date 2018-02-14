@@ -1,5 +1,28 @@
 # Helper loading functions
 
+#' @param log_path where to search
+#' @param log_type what type of resitmote log - resitmote-comapnion, or restimote
+#' @param data_field where to save parsed table
+#' @param exp_timestamp 
+#' @param obj either 
+#' @noRd
+load_restimote_generic_log <- function(log_path, log_type, data_field, exp_timestamp = NULL, obj = NULL){
+  # if we didn't pass a file to load
+  if(!is_directory(log_path)){
+    log_path <- find_restimote_file(log_path, log_type, exp_timestamp)
+  }
+  if(is.null(log_path)) return(NULL)
+  if(is.null(obj)) obj <- RestimoteObject()
+  text <- readLines(log_path, warn = F)
+  #needs to be before resaving text
+  bottomHeaderIndex <- get_indicies_between(text, "SETTINGS")$end
+  ls <- get_json_between(text, "SETTINGS")
+  obj <- fill_in_info(obj, ls)
+  obj[[data_field]] <- read.table(log_path, header = T, sep = ";", 
+                                stringsAsFactors = F, skip = bottomHeaderIndex)
+  return(obj)
+}
+
 create_separator <- function(string){
   ls <- list()
   ls$beginning <- paste("\\*\\*\\*\\",string, "\\*\\*\\*", sep="")
@@ -17,10 +40,10 @@ create_log_search_pattern <- function(log_name, log_timestamp){
 
 # Gets RestimoteObject and loaded settings in list
 # iterates through given params and fills them in if empty
-fill_in_settings <- function(obj, ls){
-  settings_params <- c("participant_id", "compass_offset", "date")
+fill_in_info <- function(obj, ls){
+  settings_params <- c("compass_offset", "date")
   for (param in settings_params){
-    if(length(obj[[param]] == 0)) obj[[param]] <- ls[[param]]
+    if(is.null(obj$info[[param]])) obj$info[[param]] <- ls[[param]]
   }
   return(obj)
 }

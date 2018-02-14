@@ -60,7 +60,7 @@ true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   #' finding the place that is the closest to the starting position ..... it might come sooner 
   #' than person really started this trial, but it doesn't matter, as times are calculated from a 
   #' differnet log - we need this for the distance summary
-  small_log <- get_position_between(obj$log, timewindow$start, timewindow$end + benevolence)
+  small_log <- get_log_timewindow.restimote(obj, timewindow$start, timewindow$end + benevolence)
   distances_start <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) navr::euclid_distance(x, start_pos))
   distances_goal <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) navr::euclid_distance(x, goal_pos))
   i_close_to_start <- NA

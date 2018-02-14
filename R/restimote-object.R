@@ -8,8 +8,7 @@ RestimoteObject <- function(){
   obj$participant_id <- ""
   obj$experiment_name <- ""
   obj$session <- NA
-  obj$date <- NA
-  obj$compass_offset <- NA
+  obj$info <- list()
   obj$n_trials <- NA
   obj$location_size <- NA
   obj$log <- NA

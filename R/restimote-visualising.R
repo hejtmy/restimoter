@@ -69,7 +69,7 @@ plot_true_trial_path <- function(obj, trialId){
 #' @export
 plot_path_time.restimote <- function(obj, start, end){
   plt <- navr::create_plot(obj)
-  df_log <- get_position_between(obj, start, end)
+  df_log <- get_log_timewindow.restimote(obj, start, end)
   plt <- navr::plot_add_path(plt, df_log$Position.X, df_log$Position.Y)
   return(plt)
 }

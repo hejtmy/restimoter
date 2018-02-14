@@ -1,21 +1,12 @@
-get_n_events <- function(df, event){
+get_n_actions <- function(df, action){
   if(is.null(nrow(df))) return(NULL)
-  n_trials <- sum(df$Action == event)
+  n_trials <- sum(df$Action == action)
   return(n_trials)
 }
 
-get_position_between <- function(df_log, start, end){
-  i_start <- get_index_time(df_log, start)
-  i_end <- get_index_time(df_log, end)
-  if(is.null(i_start) || is.null(i_end)){
-    return(NULL)
-  }
-  return(df_log[i_start:i_end, ])
-}
-
 # Returns index in df where time was larger than given time
-get_index_time <- function(df, time){
-  ids <- which(df$Time > time)
+get_time_row <- function(df, time){
+  ids <- which(df$Time >= time)
   if(length(ids) == 0){
     print("Couldn't find any recordings made after this time.")
     return(NULL)
@@ -23,26 +14,53 @@ get_index_time <- function(df, time){
   return(ids[1])
 }
 
+get_point_orientation <- function(obj, start, end){
+  i_pointed <- get_next_point_index(obj, start, end)
+  if(is.null(i_pointed)) return(NA)
+  pointed_line <- obj$log[i_pointed, ]
+  return(pointed_line$Orientation)
+}
+
 # Returns index line where participant pointed - only a first one
 # times is a list with start and end field
-get_next_point_index <- function(obj, times){
-  if(is.null(times$end)) times$end <- times$start + 100 #last trial
-  first <- which(obj$log$Action == POINTED & obj$log$Time > times$start & obj$log$Time < times$end)
-  if(length(first) == 0) {
+get_next_point_index <- function(obj, start, end = NULL){
+  if(is.null(end)) end <- start + 30 #last trial
+  first_point <- which(obj$log$Action == POINTED & obj$log$Time > start & obj$log$Time < end)
+  if(length(first_point) == 0) {
     print("Couldn't find any points made after this time.")
     return(NULL)
   }
-  return(first[1])
+  return(first_point[1])
 }
 
-#returns row index for particular action and id
-get_index_action_id <- function(obj, action, id){
-  id <- which(obj$companion$Action == action & obj$companion$Id == id)
-  if(length(id) == 0){
-    print("There isn't an event with this id")
+# Returns indices of rows when certain action occured
+# ids are which order of action you want to extract ... e.g. second "Calibrate" action row would be 
+# get_action_rows(obj, "Calibrate", 2)
+get_action_rows <- function(obj, action, ids = NULL){
+  action_rows <- which(obj$companion$Action == action)
+  if(is.null(ids)) return(action_rows)
+  n_actions <- length(action_rows)
+  if(all(ids %in% 1:n_actions)) return(action_rows[ids])
+  print(paste0("You required actions ", ids, ", but only ", n_actions, "are present"))
+  return(NULL)
+}
+
+get_action_interval <- function(obj, action, actionId){
+  if(!is_companion_preprocessed(obj)){
+    warning("Companion log is not preprocessed. Cannot do this action.")
     return(NULL)
   }
-  return(id)
+  ls <- list()
+  i_row <- get_action_rows(obj, action, actionId)
+  ls$start <- get_action_times(obj, action, actionId) #whatever action after that
+  ls$end <- ifelse(nrow(obj$companion) > i_row, obj$companion$Time[i_row + 1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  return(ls)
+}
+
+get_action_times <- function(obj, action, ids = NULL){
+  i_action <- get_action_rows(obj, action, ids)
+  if(length(i_action) != 0) return(obj$companion$Time[i_action])
+  return(NULL)
 }
 
 is_valid_trial <- function(obj, trialId){
