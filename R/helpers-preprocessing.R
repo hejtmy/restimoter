@@ -42,7 +42,10 @@ point_compass_calibrations <- function(obj){
   for(i in 1:n_calibrations){
     calib_interval <- get_action_interval(obj, "Calibrate", i)
     point_orientation <- get_point_orientation(obj, calib_interval$start, calib_interval$end)
-    obj$log <- correct_compass_offset(df_log, point_orientation, 0)
+    #Correction only from the calibration forth
+    i_point <- get_next_point_index(obj, calib_interval$start, calib_interval$end)
+    i_subset <- i_point:nrow(obj$log)
+    obj$log[i_subset,] <- correct_compass_offset(obj$log[i_subset,], point_orientation, 0)
   }
   return(obj)
 }
