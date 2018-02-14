@@ -60,23 +60,6 @@ get_trial_times.restimote <- function(obj, trialId){
   return(ls)
 }
 
-#' Returns of times when people were pointing
-#'
-#' @param obj
-#' @param pointId which point you want
-#' @param viewpoint if set, only returns pointings from given viewpoint
-#' 
-#' @return list with start and end. for last trial, end is NA, as there is no finishing signal
-#' @export
-get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
-  if(!is_companion_preprocessed(obj)) return(NULL)
-  point_interval <- get_action_interval(obj, SHOULD_POINT, pointId)
-  ls <- list()
-  ls$start <- point_interval$start
-  next_point <- get_next_point_index(obj, point_interval)
-  return(ls)
-}
-
 #' Gets number of times participant should point and pointed
 #'
 #' @param obj RestimoteObject
@@ -91,6 +74,24 @@ get_n_pointings <- function(obj){
   return(ls)
 }
 
+#' Returns of times when people were pointing
+#'
+#' @param obj
+#' @param pointId which point you want
+#' @param viewpoint if set, only returns pointings from given viewpoint
+#' 
+#' @return list with start and end. for last trial, end is NA, as there is no finishing signal
+#' @export
+get_trial_point_times.restimote <- function(obj, pointId, viewpoint = NULL){
+  if(!is_companion_preprocessed(obj)) return(NULL)
+  ls <- list()
+  point_interval <- get_action_interval(obj, SHOULD_POINT, pointId)
+  ls$start <- point_interval$start
+  i_pointed <- get_next_point_index(obj, point_interval$start, point_interval$end)
+  ls$end <- obj$log[i_pointed, ]$Time
+  return(ls)
+}
+
 #' Gets the orientation of pointing in particular trial
 #'
 #' @param obj RestimoteObject
@@ -100,9 +101,10 @@ get_n_pointings <- function(obj){
 #' @export 
 #'
 #' @examples
-get_trial_point_orientation <- function(obj, trialId){
-  times <- get_trial_point_times(obj, trialId)
-  return(get_point_orientation(obj, times$start, times$end))
+get_trial_point_orientation.restimote <- function(obj, trialId){
+  times <- get_action_interval(obj, SHOULD_POINT, trialId)
+  point_orientation <- get_point_orientation(obj, times$start, times$end)
+  return(point_orientation)
 }
 
 #' returns vector 2 of x and Y position of trial goal position
