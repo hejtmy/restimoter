@@ -29,8 +29,3 @@ remove_mistakes <- function(df){
 is_log_preprocessed <- function(obj){
   
 }
-
-correct_compass <- function(obj){
-  
-  return(obj)
-}

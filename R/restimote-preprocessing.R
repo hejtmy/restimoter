@@ -22,7 +22,6 @@ preprocess_companion_log <- function(obj){
 #' @examples
 preprocess_restimote_log <- function(obj){
   obj <- add_walked_distance(obj)
-  obj <- correct_compass(obj)
   return(obj)
 }
 
@@ -107,4 +106,31 @@ add_goal_order.restimote <- function(obj, order){
   #validate if numbers
   obj$goal_order <- order
   return(obj)
+}
+
+#' Fixes possible compass offsets created by iPhone irregular comapss settings
+#'
+#' @description 
+#' Estimote sets each map to a certain orientation and then substracts that from compass information it is getting. 
+#' But it happens, that iPhone compass calibrates like crazy. This function searches for parts of the log that are 
+#' CAlibrated using the calibrate function in the restimote app and then separately preprocesses those parts where 
+#' researcher asked participant to calibrate manually
+#' 
+#' @param obj RestimoteObject
+#' @param estimote_offset Offset of the map as set in the estimote Layout
+#'
+#' @return estimote object
+#' @export
+#'
+#' @examples 
+#' obj <- calibrate_compass(obj, 321)
+calibrate_compass <- function(obj, estimote_offset){
+  offset <- obj$info$compass_offset
+  if(!is.null(offset)){
+    print(paste0("Correcting compass offset of", offset, " to match original ", estimote_offset, "."))
+    obj$log <- correct_compass_offset(obj$log, estimote_offset, offset)
+  }
+  if(!is.null(obj$companion)){
+    obj$com
+  }
 }
