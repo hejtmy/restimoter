@@ -8,7 +8,7 @@
 #' @examples
 preprocess_companion_log <- function(obj){
   obj$companion <- add_actions_ids(obj$companion)
-  obj$n_trials <- get_n_events(obj$companion, NEW_TRIAL)
+  obj$n_trials <- get_n_actions(obj$companion, NEW_TRIAL)
   return(obj)
 }
 
@@ -128,10 +128,9 @@ calibrate_compass <- function(obj, estimote_offset){
   offset <- obj$info$compass_offset
   if(!is.null(offset)){
     print(paste0("Correcting compass offset of", offset, " to match original ", estimote_offset, "."))
-    obj$log <- correct_compass_offset(obj$log, estimote_offset, offset)
+    obj$log <- correct_starting_compass_offset(obj$log, estimote_offset, offset)
   }
   if(!is.null(obj$companion)){
-    get_action_times(obj, "Calibrate")
-    print(paste0("Correcting compass offset of", offset, " to match original ", estimote_offset, "."))
+    obj$log <- calibrate_compass_offset(obj$log, estimote_offset)
   }
 }

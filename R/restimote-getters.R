@@ -40,7 +40,7 @@ get_trial_times.restimote <- function(obj, trialId){
 #' @export
 get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
   if(!is_companion_preprocessed(obj)) return(NULL)
-  point_interval <- get_trial_point_interval(obj, pointId)
+  point_interval <- get_action_interval(obj, SHOULD_POINT, pointId)
   ls <- list()
   ls$start <- point_interval$start
   next_point <- get_next_point_index(obj, point_interval)
@@ -55,8 +55,8 @@ get_trial_point_times <- function(obj, pointId, viewpoint = NULL){
 #' @export
 get_n_pointings <- function(obj){
   ls <- list()
-  ls$log <- get_n_events(obj$log, POINTED)
-  ls$companion <- get_n_events(obj$companion, SHOULD_POINT)
+  ls$log <- get_n_actions(obj$log, POINTED)
+  ls$companion <- get_n_actions(obj$companion, SHOULD_POINT)
   print(paste0("Player pointed ", ls$log, " and companion has ", ls$companion," points registered."))
   return(ls)
 }
@@ -72,10 +72,7 @@ get_n_pointings <- function(obj){
 #' @examples
 get_trial_point_orientation <- function(obj, trialId){
   times <- get_trial_point_times(obj, trialId)
-  i_pointed <- get_next_point_index(obj, times$start, times$end)
-  if(is.null(i_pointed)) return(NA)
-  pointed_line <- obj$log[i_pointed, ]
-  return(pointed_line$Orientation)
+  return(get_point_orientation(obj, times$start, times$end))
 }
 
 #' returns vector 2 of x and Y position of trial goal position

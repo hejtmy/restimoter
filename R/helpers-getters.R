@@ -1,6 +1,6 @@
-get_n_events <- function(df, event){
+get_n_actions <- function(df, action){
   if(is.null(nrow(df))) return(NULL)
-  n_trials <- sum(df$Action == event)
+  n_trials <- sum(df$Action == action)
   return(n_trials)
 }
 
@@ -23,9 +23,11 @@ get_time_row <- function(df, time){
   return(ids[1])
 }
 
-get_trial_point_interval <- function(obj, pointId){
-  ls <- get_action_interval(obj, SHOULD_POINT, pointId)
-  return(ls)
+get_point_orientation <- function(obj, start, end){
+  i_pointed <- get_next_point_index(obj, start, end)
+  if(is.null(i_pointed)) return(NA)
+  pointed_line <- obj$log[i_pointed, ]
+  return(pointed_line$Orientation)
 }
 
 # Returns index line where participant pointed - only a first one
@@ -60,7 +62,7 @@ get_action_interval <- function(obj, action, actionId){
   ls <- list()
   i_row <- get_action_rows(obj, action, actionId)
   ls$start <- get_action_times(obj, action, actionId) #whatever action after that
-  ifelse(nrow(obj$companion) > i_row, obj$companion$Time[i_row + 1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  ls$end <- ifelse(nrow(obj$companion) > i_row, obj$companion$Time[i_row + 1], ls$end <- tail(obj$log$Time, 1)) #last pointing
   return(ls)
 }
 
