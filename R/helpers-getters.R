@@ -24,7 +24,7 @@ get_point_orientation <- function(obj, start, end){
 # Returns index line where participant pointed - only a first one
 # times is a list with start and end field
 get_next_point_index <- function(obj, start, end = NULL){
-  if(is.null(end)) end <- start + 100 #last trial
+  if(is.null(end)) end <- start + 30 #last trial
   first_point <- which(obj$log$Action == POINTED & obj$log$Time > start & obj$log$Time < end)
   if(length(first_point) == 0) {
     print("Couldn't find any points made after this time.")

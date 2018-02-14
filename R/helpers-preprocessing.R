@@ -32,7 +32,7 @@ is_log_preprocessed <- function(obj){
 
 correct_compass_offset <- function(df_log, compass_shows, compass_should_be){
   compass_difference <- compass_should_be - compass_shows
-  df_log$Orientation <- angle_to_360(df_log$Orientation - compass_difference)
+  df_log$Orientation <- angle_to_360(df_log$Orientation + compass_difference)
   return(df_log)
 }
 
