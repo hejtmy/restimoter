@@ -24,10 +24,7 @@ get_time_row <- function(df, time){
 }
 
 get_trial_point_interval <- function(obj, pointId){
-  if(!is_companion_preprocessed(obj)) return(NULL)
-  ls <- list()
-  ls$start <- get_action_times(obj, SHOULD_POINT, pointId) #whatever action after that
-  ls$end <- ifelse(nrow(obj$companion) > i_point, obj$companion$Time[i_point+1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  ls <- get_action_interval(obj, SHOULD_POINT, pointId)
   return(ls)
 }
 
@@ -53,6 +50,18 @@ get_action_rows <- function(obj, action, ids = NULL){
   if(all(ids %in% 1:n_actions)) return(action_rows[ids])
   print(paste0("You required actions ", ids, ", but only ", n_actions, "are present"))
   return(NULL)
+}
+
+get_action_interval <- function(obj, action, actionId){
+  if(!is_companion_preprocessed(obj)){
+    warning("Companion log is not preprocessed. Cannot do this action.")
+    return(NULL)
+  }
+  ls <- list()
+  i_row <- get_action_rows(obj, action, actionId)
+  ls$start <- get_action_times(obj, action, actionId) #whatever action after that
+  ifelse(nrow(obj$companion) > i_row, obj$companion$Time[i_row + 1], ls$end <- tail(obj$log$Time, 1)) #last pointing
+  return(ls)
 }
 
 get_action_times <- function(obj, action, ids = NULL){
