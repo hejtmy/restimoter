@@ -123,8 +123,8 @@ get_start_position <- function(obj, trialId){
 
 #' returns vector 2 of x and Y position of trial goal position
 #'
-#' @param obj 
-#' @param trialId 
+#' @param obj Restimote object
+#' @param trialId what trial
 #'
 #' @return vector 2 of x and Y of the goal position
 #' @export 

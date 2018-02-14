@@ -5,7 +5,6 @@ get_n_actions <- function(df, action){
 }
 
 
-
 # Returns index in df where time was larger than given time
 get_time_row <- function(df, time){
   ids <- which(df$Time >= time)
