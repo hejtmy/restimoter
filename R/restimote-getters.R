@@ -208,7 +208,7 @@ get_trial_point_orientation.restimote <- function(obj, trialId){
   return(point_orientation)
 }
 
-#'returns 2D vector with x and Y position of trial start position
+#' Returns 2D vector with x and Y position of trial start position
 #'
 #' @param obj Restimote object
 #' @param trialId integer of the trial to fetch

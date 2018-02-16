@@ -35,8 +35,8 @@ restimote.plot_trials_paths <- function(obj, columns = 5, indices = c(), until_r
 
 #' Plots path as calculated by the true trial log, rather than by given timestamps
 #'
-#' @param obj 
-#' @param trialId 
+#' @param obj Restimote objects
+#' @param trialId integer determining trial to plot
 #'
 #' @return
 #' @export

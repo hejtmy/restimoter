@@ -70,7 +70,6 @@ get_next_point_index <- function(obj, start, end = NULL){
   }
   return(first_point[1])
 }
-
 # CHECKS ----
 is_valid_trial <- function(obj, trialId){
   if(trialId > obj$n_trials){
@@ -79,7 +78,6 @@ is_valid_trial <- function(obj, trialId){
   }
   return(TRUE)
 }
-
 check_goal_fields <- function(obj){
   if(!has_goal_positions(obj)){
     warning("There are no positions entered. Returning NULL")
@@ -91,11 +89,9 @@ check_goal_fields <- function(obj){
   }
   return(TRUE)
 }
-
 has_goal_positions <- function(obj){
   return(is.data.frame(obj$goal_positions) && nrow(obj$goal_positions) > 1)
 }
-
 has_goal_order <- function(obj){
   return(length(obj$goal_order) > 1 && !is.na(obj$goal_order))
 }
