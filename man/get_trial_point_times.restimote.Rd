@@ -7,7 +7,9 @@
 get_trial_point_times.restimote(obj, pointId, viewpoint = NULL)
 }
 \arguments{
-\item{pointId}{which point you want}
+\item{obj}{Restimote object}
+
+\item{pointId}{which point order you want}
 
 \item{viewpoint}{if set, only returns pointings from given viewpoint}
 }

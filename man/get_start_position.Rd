@@ -2,18 +2,18 @@
 % Please edit documentation in R/restimote-getters.R
 \name{get_start_position}
 \alias{get_start_position}
-\title{returns vector 2 of x and Y position of trial goal position}
+\title{returns 2D vector with x and Y position of trial start position}
 \usage{
 get_start_position(obj, trialId)
 }
 \arguments{
-\item{obj}{}
+\item{obj}{Restimote object}
 
-\item{trialId}{}
+\item{trialId}{integer of the trial to fetch}
 }
 \value{
-vector 2 of x and Y of the starting position
+2D vector with x and Y of the starting position
 }
 \description{
-returns vector 2 of x and Y position of trial goal position
+returns 2D vector with x and Y position of trial start position
 }

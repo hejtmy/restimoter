@@ -2,7 +2,7 @@
 % Please edit documentation in R/restimote-getters.R
 \name{get_goal_position}
 \alias{get_goal_position}
-\title{returns vector 2 of x and Y position of trial goal position}
+\title{returns 2D vector with x and Y position of trial goal position}
 \usage{
 get_goal_position(obj, trialId)
 }
@@ -12,8 +12,8 @@ get_goal_position(obj, trialId)
 \item{trialId}{what trial}
 }
 \value{
-vector 2 of x and Y of the goal position
+2D vector with x and Y of the goal position
 }
 \description{
-returns vector 2 of x and Y position of trial goal position
+returns 2D vector with x and Y position of trial goal position
 }

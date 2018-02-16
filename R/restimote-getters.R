@@ -1,4 +1,4 @@
-#' Returns log object with positions during the experiment
+#' Returns log  data frame with positions during the experiment
 #'
 #' @param obj 
 #'
@@ -8,6 +8,18 @@
 #' @examples
 get_log.restimote <- function(obj){
   return(obj$log)
+}
+
+#' Returns companion data frame with all the actions experiemnter logged
+#'
+#' @param obj 
+#'
+#' @return data.frame with the log
+#' @export
+#'
+#' @examples
+get_companion <- function(obj){
+  return(obj$companion)
 }
 
 #' Returns log from particular time to another time
@@ -22,10 +34,24 @@ get_log.restimote <- function(obj){
 #' @examples
 get_log_timewindow.restimote <- function(obj, start, end){
   df_log <- get_log.restimote(obj)
-  i_start <- get_time_row(df_log, start)
-  i_end <- get_time_row(df_log, end)
-  if(is.null(i_start) || is.null(i_end)) return(NULL)
-  return(df_log[i_start:i_end, ])
+  df_log <- get_df_timewindow(df_log, start, end)
+  return(df_log)
+}
+
+#' Returns companion from particular time to another time
+#'
+#' @param obj Restimote object with companion loaded
+#' @param start Starting time of the log
+#' @param end last accepable time of the log
+#'
+#' @return data.frame companion log
+#' @export
+#'
+#' @examples
+get_companion_timewindow <- function(obj, start, end){
+  df_log <- get_companion(obj)
+  df_log <- get_df_timewindow(df_log, start, end)
+  return(df_log)
 }
 
 #' Gets position data inside trial
@@ -39,6 +65,20 @@ get_log_timewindow.restimote <- function(obj, start, end){
 get_trial_log.restimote <- function(obj, trialId){
   timewindow <- get_trial_times.restimote(obj, trialId)
   df_log <- get_log_timewindow.restimote(obj, timewindow$start, timewindow$end)
+  return(df_log)
+}
+
+#' Gets companion data inside trial
+#' 
+#' @param obj RestimoteObject object
+#' @param trialID int designating which trial to select
+#' 
+#' @return log data.frame with only rows from during the trial
+#' 
+#' @export
+get_trial_companion.restimote <- function(obj, trialId){
+  timewindow <- get_trial_times.restimote(obj, trialId)
+  df_log <- get_companion_timewindow(obj, timewindow$start, timewindow$end)
   return(df_log)
 }
 
@@ -60,6 +100,67 @@ get_trial_times.restimote <- function(obj, trialId){
   return(ls)
 }
 
+#' Returns times when certain action occured during entire experiment
+#'
+#' @param obj Restimote object with companion loaded
+#' @param trialId integer designating which trial to load
+#' @param action string with the name of the action
+#'
+#' @return vector of times
+#' @export
+#'
+#' @examples
+get_action_times.restimote <- function(obj, action){
+  df_log <- get_companion(obj)
+  times <- get_df_action_times(df_log, action)
+  return(times)
+}
+
+#' Returns times when certain action occured during a trial
+#'
+#' @param obj Restimote object with companion loaded
+#' @param trialId integer designating which trial to load
+#' @param action string with the name of the action
+#'
+#' @return vector of times
+#' @export
+#'
+#' @examples
+get_trial_action_times.restimote <- function(obj, trialId, action){
+  df_log <- get_trial_companion.restimote(obj, trialId)
+  times <- get_df_action_times(df_log, action)
+  return(times)
+}
+
+#' Returns how many actions of particular type were recorded
+#'
+#' @param obj
+#' @param action string with searched action name
+#' @param ... extra parameters
+#'
+#' @return integer with number of recorded actions
+#' @export
+#'
+#' @examples
+get_n_actions.restimote <- function(obj, action){
+  return(length(get_action_times.restimote(obj, action)))
+}
+
+#' Returns how many actions of particular type were recorded during particular trial
+#' 
+#' @param obj
+#' @param trialId integer with valid trialId
+#' @param action string with searched action name
+#' @param ...
+#'
+#' @return integer with number of recorded actions during particular trial
+#' @export
+#'
+#' @examples
+get_trial_n_actions.restimote <- function(obj, trialId, action){
+  return(length(get_trial_action_times.restimote(obj, trialId, action)))
+}
+
 #' Gets number of times participant should point and pointed
 #'
 #' @param obj RestimoteObject
@@ -68,16 +169,16 @@ get_trial_times.restimote <- function(obj, trialId){
 #' @export
 get_n_pointings <- function(obj){
   ls <- list()
-  ls$log <- get_n_actions(obj$log, POINTED)
-  ls$companion <- get_n_actions(obj$companion, SHOULD_POINT)
+  ls$log <- get_df_n_actions(obj$log, POINTED)
+  ls$companion <- get_df_n_actions(obj$companion, SHOULD_POINT)
   print(paste0("Player pointed ", ls$log, " and companion has ", ls$companion," points registered."))
   return(ls)
 }
 
 #' Returns of times when people were pointing
 #'
-#' @param obj
-#' @param pointId which point you want
+#' @param obj Restimote object
+#' @param pointId which point order you want
 #' @param viewpoint if set, only returns pointings from given viewpoint
 #' 
 #' @return list with start and end. for last trial, end is NA, as there is no finishing signal
@@ -107,12 +208,12 @@ get_trial_point_orientation.restimote <- function(obj, trialId){
   return(point_orientation)
 }
 
-#' returns vector 2 of x and Y position of trial goal position
+#'returns 2D vector with x and Y position of trial start position
 #'
-#' @param obj 
-#' @param trialId 
+#' @param obj Restimote object
+#' @param trialId integer of the trial to fetch
 #'
-#' @return vector 2 of x and Y of the starting position
+#' @return 2D vector with x and Y of the starting position
 #' @export 
 #'
 #' @examples
@@ -121,12 +222,12 @@ get_start_position <- function(obj, trialId){
   return(get_goal_position(obj, trialId - 1))
 }
 
-#' returns vector 2 of x and Y position of trial goal position
+#' returns 2D vector with x and Y position of trial goal position
 #'
 #' @param obj Restimote object
 #' @param trialId what trial
 #'
-#' @return vector 2 of x and Y of the goal position
+#' @return 2D vector with x and Y of the goal position
 #' @export 
 #'
 #' @examples
