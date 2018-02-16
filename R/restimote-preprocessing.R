@@ -8,7 +8,7 @@
 #' @examples
 preprocess_companion_log <- function(obj){
   obj$companion <- add_actions_ids(obj$companion)
-  obj$n_trials <- get_n_actions(obj$companion, NEW_TRIAL)
+  obj$n_trials <- get_df_n_actions(obj$companion, NEW_TRIAL)
   return(obj)
 }
 

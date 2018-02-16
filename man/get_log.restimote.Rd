@@ -2,7 +2,7 @@
 % Please edit documentation in R/restimote-getters.R
 \name{get_log.restimote}
 \alias{get_log.restimote}
-\title{Returns log object with positions during the experiment}
+\title{Returns log  data frame with positions during the experiment}
 \usage{
 \method{get_log}{restimote}(obj)
 }
@@ -13,5 +13,5 @@
 data.frame with the log
 }
 \description{
-Returns log object with positions during the experiment
+Returns log  data frame with positions during the experiment
 }

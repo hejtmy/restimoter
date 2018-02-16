@@ -1,7 +1,11 @@
 # SEARCHING -----
-get_n_actions <- function(df, action){
-  if(is.null(nrow(df))) return(NULL)
-  n_trials <- sum(df$Action == action)
+get_df_action_times <- function(df, action){
+  if(is.null(nrow(df))) return(numeric(0))
+  times <- df$Time[df$Action == action]
+  return(times)
+}
+get_df_n_actions <- function(df, action){
+  n_trials <- length(get_df_action_times(df, action))
   return(n_trials)
 }
 # Returns index in df where time was larger than given time
