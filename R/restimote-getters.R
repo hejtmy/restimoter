@@ -21,7 +21,7 @@ get_log.restimote <- function(obj){
 #'
 #' @examples
 get_log_timewindow.restimote <- function(obj, start, end){
-  df_log <- get_log(obj)
+  df_log <- get_log.restimote(obj)
   i_start <- get_time_row(df_log, start)
   i_end <- get_time_row(df_log, end)
   if(is.null(i_start) || is.null(i_end)) return(NULL)
@@ -38,7 +38,7 @@ get_log_timewindow.restimote <- function(obj, start, end){
 #' @export
 get_trial_log.restimote <- function(obj, trialId){
   timewindow <- get_trial_times.restimote(obj, trialId)
-  df_log <- get_log_timewindow.restimote(obj$log, timewindow$start, timewindow$end)
+  df_log <- get_log_timewindow.restimote(obj, timewindow$start, timewindow$end)
   return(df_log)
 }
 
