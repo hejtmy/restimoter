@@ -4,7 +4,7 @@
 \alias{get_n_actions.restimote}
 \title{Returns how many actions of particular type were recorded}
 \usage{
-\method{get_n_actions}{restimote}(obj, actions)
+\method{get_n_actions}{restimote}(obj, action)
 }
 \arguments{
 \item{action}{string with searched action name}

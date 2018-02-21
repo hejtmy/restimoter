@@ -91,13 +91,36 @@ get_trial_companion.restimote <- function(obj, trialId){
 #' @export
 #'
 #' @examples
-# TODO - redo to trial finishes
 get_trial_times.restimote <- function(obj, trialId){
   if(!is_companion_preprocessed(obj)) return(NULL)
   ls <- list()
   ls$start <- get_action_times(obj, NEW_TRIAL, trialId)
   ls$end <- get_action_times(obj, FINISH_TRIAL, trialId)
   return(ls)
+}
+
+#' Returns length of the trial withouth pauses/app resets included
+#'
+#' @param obj Restimote object
+#' @param trialId 
+#' @param withoutPauses bool. Defaults to true
+#'
+#' @return numeric of time length
+#' @export
+#'
+#' @examples
+get_trial_duration.restimote <- function(obj, trialId, withoutPauses = T){
+  PAUSE_LIMIT <- 10
+  log <- get_trial_log.restimote(obj, trialId)
+  times <- get_trial_times.restimote(obj, trialId)
+  time_diff <- diff(log$Time)
+  if(withoutPauses){
+    pause_time <- sum(time_diff[time_diff > PAUSE_LIMIT])
+    dur <- times$end - times$start - pause_time
+  } else {
+    dur <- times$end - times$start
+  }
+  return(dur)
 }
 
 #' Returns times when certain action occured during entire experiment
