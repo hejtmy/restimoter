@@ -113,8 +113,8 @@ get_trial_duration.restimote <- function(obj, trialId, withoutPauses = T){
   PAUSE_LIMIT <- 10
   log <- get_trial_log.restimote(obj, trialId)
   times <- get_trial_times.restimote(obj, trialId)
-  time_diff <- diff(log$Time)
   if(withoutPauses){
+    time_diff <- diff(log$Time)
     pause_time <- sum(time_diff[time_diff > PAUSE_LIMIT])
     dur <- times$end - times$start - pause_time
   } else {
