@@ -41,6 +41,7 @@ point_compass_calibrations <- function(obj){
   #can point earlier than researcher presses the calibrate button
   n_calibrations <- get_df_n_actions(obj$companion, "Calibrate")
   print(paste0("Threre are ", n_calibrations, " calibration points"))
+  if(n_calibrations == 0) return(obj)
   for(i in 1:n_calibrations){
     calib_interval <- get_action_interval(obj, "Calibrate", i)
     calib_interval$start <- calib_interval$start - LENIENCE
