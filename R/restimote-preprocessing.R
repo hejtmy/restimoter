@@ -99,8 +99,6 @@ add_goal_positions.restimote <- function(obj, positions){
 #'
 #' @return RestimoteObject witha added field
 #' @export
-#'
-#' @examples 
 add_goal_order.restimote <- function(obj, order){
   #validate numebr of goals
   #validate if numbers

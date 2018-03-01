@@ -103,19 +103,19 @@ get_trial_times.restimote <- function(obj, trialId){
 #'
 #' @param obj Restimote object
 #' @param trialId 
-#' @param withoutPauses bool. Defaults to true
+#' @param without_pauses bool. Defaults to true
+#' @param pause_limit Defaults to 10
 #'
 #' @return numeric of time length
 #' @export
 #'
 #' @examples
-get_trial_duration.restimote <- function(obj, trialId, withoutPauses = T){
-  PAUSE_LIMIT <- 10
+get_trial_duration.restimote <- function(obj, trialId, without_pauses = T, pause_limit = 10){
   log <- get_trial_log.restimote(obj, trialId)
   times <- get_trial_times.restimote(obj, trialId)
-  if(withoutPauses){
+  if(without_pauses){
     time_diff <- diff(log$Time)
-    pause_time <- sum(time_diff[time_diff > PAUSE_LIMIT])
+    pause_time <- sum(time_diff[time_diff > pause_limit])
     dur <- times$end - times$start - pause_time
   } else {
     dur <- times$end - times$start

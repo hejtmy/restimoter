@@ -4,14 +4,17 @@
 \alias{get_trial_duration.restimote}
 \title{Returns length of the trial withouth pauses/app resets included}
 \usage{
-\method{get_trial_duration}{restimote}(obj, trialId, withoutPauses = T)
+\method{get_trial_duration}{restimote}(obj, trialId, without_pauses = T,
+  pause_limit = 10)
 }
 \arguments{
 \item{obj}{Restimote object}
 
 \item{trialId}{}
 
-\item{withoutPauses}{bool. Defaults to true}
+\item{without_pauses}{bool. Defaults to true}
+
+\item{pause_limit}{Defaults to 10}
 }
 \value{
 numeric of time length
