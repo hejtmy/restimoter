@@ -4,12 +4,12 @@
 \alias{get_trial_duration}
 \title{Returns how long the trial took and removes potential pauses in the log}
 \usage{
-get_trial_duration(obj, trialId, withoutPauses = T, ...)
+get_trial_duration(obj, trialId, without_pauses = T, ...)
 }
 \arguments{
 \item{obj}{}
 
-\item{withoutPauses}{Defaults to true}
+\item{without_pauses}{Defaults to true}
 
 \item{...}{}
 }
