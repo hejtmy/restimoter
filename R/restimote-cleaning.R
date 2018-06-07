@@ -52,6 +52,11 @@ remove_random_points <- function(df_player, allowed_speed = 4){
 #'
 #' @examples
 true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
+ ls <- find_true_trial_log(obj, trialId, benevolence, radius)
+ return(ls$log)
+}
+
+find_true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   start_pos <- get_start_position(obj, trialId)
   goal_pos <- get_goal_position(obj, trialId)
   # positions are shifted to the later times ... so we know that the trial definitely starte at 
@@ -65,7 +70,8 @@ true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   distances_goal <- apply(small_log[, c('Position.X', "Position.Y")], 1, function(x) navr::euclid_distance(x, goal_pos))
   i_close_to_start <- NA
   i_close_to_goal <- NA
-  for(rad in seq(0.5, radius, 0.25)){
+  found_radius <- 0
+  for(found_radius in seq(0.5, radius, 0.1)){
     if(is.na(i_close_to_start)) i_close_to_start <- which(distances_start < rad)[1]
     if(is.na(i_close_to_goal)) i_close_to_goal <- which(distances_goal < rad)[1]
   }
@@ -73,5 +79,7 @@ true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
     print("wasn't able to find a goal within such radius")
     return(NULL)
   }
-  return(small_log[i_close_to_start:i_close_to_goal,])
+  found_log <- small_log[i_close_to_start:i_close_to_goal, ]
+  found_benevolence <- small_log$Time[i_close_to_goal] - timewindow$end
+  return(list(log = found_log, radius = found_radius, benevolence = found_benevolence))
 }

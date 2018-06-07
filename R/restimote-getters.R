@@ -123,6 +123,28 @@ get_trial_duration.restimote <- function(obj, trialId, without_pauses = T, pause
   return(dur)
 }
 
+
+#' Returns distance traveled during a particular trial
+#'
+#' @param obj 
+#' @param trialId 
+#' @param true_log 
+#' @param benevolence only valid if true_log. See benevolence in true_trial_log
+#' @param radius only valid if true_log. See radius in true_trial_log
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_trial_distance.restimote <- function(obj, trialId, true_log = T, benevolence = 20, radius = 5){
+  if(true_log){
+    log <- true_trial_log(obj, trialId, benevolence, radius)
+  } else {
+    log <- get_trial_log(obj, trialId)
+  }
+  
+}
+
 #' Returns times when certain action occured during entire experiment
 #'
 #' @param obj Restimote object with companion loaded
