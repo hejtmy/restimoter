@@ -30,7 +30,6 @@ Data is now loaded in a list object
 we can access restimote log easilly by 
 ```{r}
 head(obj$log)
-
 ```
 
 ```{r}
