@@ -83,7 +83,7 @@ create_true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
       goal_radius <- rad
     }
   }
-  if(any(is.na(c(i_close_to_goal, i_close_to_start)))){zzzz
+  if(any(is.na(c(i_close_to_goal, i_close_to_start)))){
     print("wasn't able to find a goal within such radius")
     return(NULL)
   }
