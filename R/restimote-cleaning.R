@@ -96,6 +96,8 @@ create_true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   found_log[nrow(found_log), "Position.Y"] <- goal_pos[2]
   
   # recalculating distance
+  # TODO - only need to change first and last row
+  found_log$distance <- navr::euclid_distance_between_rows(data.frame(found_log$Position.X, found_log$Position.Y))
   
   found_benevolence <- small_log$Time[i_close_to_goal] - timewindow$end
   return(list(log = found_log, goal_radius = goal_radius, start_radius = start_radius, benevolence = found_benevolence))
