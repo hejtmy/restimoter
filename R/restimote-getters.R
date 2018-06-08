@@ -138,7 +138,7 @@ get_trial_duration.restimote <- function(obj, trialId, without_pauses = T, pause
 get_trial_distance.restimote <- function(obj, trialId, true_log = T, benevolence = 20, radius = 5){
   if(true_log){
     ls <- find_true_trial_log(obj, trialId, benevolence, radius)
-    return(sum(ls$distance) + ls$radius) #adds the radius to the door participant never reached
+    return(sum(ls$log$distance) + ls$radius) #adds the radius to the door participant never reached
   } else {
     log <- get_trial_log(obj, trialId)
     return(sum(log$distance))
