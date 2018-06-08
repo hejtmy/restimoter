@@ -72,8 +72,8 @@ find_true_trial_log <- function(obj, trialId, benevolence = 30, radius = 2){
   i_close_to_goal <- NA
   found_radius <- 0
   for(found_radius in seq(0.5, radius, 0.1)){
-    if(is.na(i_close_to_start)) i_close_to_start <- which(distances_start < rad)[1]
-    if(is.na(i_close_to_goal)) i_close_to_goal <- which(distances_goal < rad)[1]
+    if(is.na(i_close_to_start)) i_close_to_start <- which(distances_start < found_radius)[1]
+    if(is.na(i_close_to_goal)) i_close_to_goal <- which(distances_goal < found_radius)[1]
   }
   if(any(is.na(c(i_close_to_goal, i_close_to_start)))){
     print("wasn't able to find a goal within such radius")
